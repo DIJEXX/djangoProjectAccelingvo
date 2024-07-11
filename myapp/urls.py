@@ -12,3 +12,5 @@ urlpatterns = [
     path('difficulty/<str:level>/', views.difficulty_level, name='difficulty_level'),
     path('themes/<str:theme>/', views.theme_selection, name='theme_selection'),
 ]
+
+# test commit
