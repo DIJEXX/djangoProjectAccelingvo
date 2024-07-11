@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accelingvo</title>
+    <style>
+        body {
+            background-image: url('/static/Data/background.jpg');
+            background-size: cover;
+            font-family: "Times New Roman", Times, serif;
+        }
+        .container {
+            text-align: center;
+            padding-top: 50px;
+        }
+        .button {
+            font-size: 32px;
+            font-weight: bold;
+            color: #183b66;
+            background-color: #8fc6da;
+            padding: 12px;
+            margin: 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: #183b66;">Добро пожаловать в Accelingvo!</h1>
+        <h1 style="color: #183b66;">Welcome to Accelingvo!</h1>
+        <h2 style="color: #183b66;">(Выберите родной язык/Choose native language):</h2>
+        <button class="button" onclick="location.href='{% url 'register' %}'">Русский</button>
+        <button class="button" onclick="location.href='{% url 'register_eng' %}'">English</button>
+    </div>
+</body>
+</html>
