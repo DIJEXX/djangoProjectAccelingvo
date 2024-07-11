@@ -13,4 +13,4 @@ urlpatterns = [
     path('themes/<str:theme>/', views.theme_selection, name='theme_selection'),
 ]
 
-# test commit
+# test commit 2
