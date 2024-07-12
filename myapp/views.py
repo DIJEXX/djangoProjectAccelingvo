@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import RegistrationForm, RegistrationFormEng
+from django.contrib.auth import authenticate, login
+from .forms import RegistrationForm, RegistrationFormEng, LoginForm
 from .models import User
 from django.conf import settings
 
@@ -9,14 +10,20 @@ def index(request):
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
+        login_form = LoginForm(request, data=request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.language = 'ru'
             user.save()
             return redirect('/')
+        elif login_form.is_valid():
+            user = login_form.get_user()
+            login(request, user)
+            return redirect('/')
     else:
         form = RegistrationForm()
-    return render(request, 'register.html', {'form': form})
+        login_form = LoginForm()
+    return render(request, 'register.html', {'form': form, 'login_form': login_form})
 
 def register_eng(request):
     if request.method == 'POST':

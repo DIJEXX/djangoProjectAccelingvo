@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Регистрация</title>
+    <style>
+        body {
+            background-image: url('/static/Data/background.jpg');
+            background-size: cover;
+            font-family: "Times New Roman", Times, serif;
+        }
+    </style>
 </head>
 <body>
     <h1>Регистрация на русском языке</h1>
@@ -14,5 +21,12 @@
     {% if form.is_valid %}
         <p>Регистрация прошла успешно!</p>
     {% endif %}
+
+    <h2>Авторизация</h2>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ login_form.as_p }}
+        <button type="submit">Войти</button>
+    </form>
 </body>
 </html>
