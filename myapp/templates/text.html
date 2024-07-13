@@ -3,9 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Управление текстом</title>
+    <link rel="icon" href="{'static/Data/py.ico' %}">
+    <style>
+        body {
+            background-image: url('/static/Data/background.jpg');
+            background-size: cover;
+            font-family: "Times New Roman", Times, serif;
+        }
+        .button {
+            font-size: 32px;
+            font-weight: bold;
+            color: #183b66;
+            padding: 12px;
+            background-color: #8fc6da;
+            border: none;
+            margin: 10px;
+        }
+        .label {
+            font-size: 32px;
+            color: #183b66;
+            padding: 8px;
+            background-color: #8fc6da;
+        }
+    </style>
 </head>
 <body>
-    <h1>Управление текстом</h1>
-    <button onclick="location.href='#'">Изменить текст</button>
+        <div style="text-align: center; padding-top: 100px;">
+        <h1>Управление текстом</h1>
+        <button class="button" onclick="location.href='#'">Изменить текст</button>
+        <button class="button" onclick="location.href='{% url 'main' %}'">Выйти</button>
+    </div>
+    
 </body>
 </html>

@@ -3,16 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Регистрация</title>
+    <link rel="icon" href="{'static/Data/py.ico' %}">
+    <style>
+        body {
+            background-image: url('/static/Data/background.jpg');
+            background-size: cover;
+            font-family: "Times New Roman", Times, serif;
+        }
+        .button {
+            font-size: 32px;
+            font-weight: bold;
+            color: #183b66;
+            padding: 12px;
+            background-color: #8fc6da;
+            border: none;
+            margin: 10px;
+        }
+        .label {
+            font-size: 32px;
+            color: #183b66;
+            padding: 8px;
+            background-color: #8fc6da;
+        }
+    </style>
 </head>
 <body>
-    <h1>Регистрация на русском языке</h1>
-    <form method="post">
+    <div style="text-align: center; padding-top: 100px;">
+        <h1>Регистрация на русском языке</h1>
+        <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Зарегистрироваться</button>
-    </form>
-    {% if form.is_valid %}
+        <button class="button" type="submit">Зарегистрироваться</button>
+        </form>
+        {% if form.is_valid %}
         <p>Регистрация прошла успешно!</p>
-    {% endif %}
+        {% endif %}
+        <button class="button" onclick="location.href='{% url 'index' %}'">Выйти</button>
+    </div>
 </body>
 </html>

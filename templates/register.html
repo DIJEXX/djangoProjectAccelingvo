@@ -3,13 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Регистрация</title>
-    <style>
-        body {
-            background-image: url('/static/Data/background.jpg');
-            background-size: cover;
-            font-family: "Times New Roman", Times, serif;
-        }
-    </style>
+            <style>
+            body {
+                background-image: url('/static/Data/background.jpg');
+                background-size: cover;
+                font-family: "Times New Roman", Times, serif;
+            }
+            .container {
+                text-align: center;
+                padding-top: 50px;
+            }
+            .button {
+                font-size: 32px;
+                font-weight: bold;
+                color: #183b66;
+                background-color: #8fc6da;
+                padding: 12px;
+                margin: 20px;
+                border: none;
+                cursor: pointer;
+            }
+        </style>
 </head>
 <body>
     <h1>Регистрация на русском языке</h1>
@@ -27,6 +41,7 @@
         {% csrf_token %}
         {{ login_form.as_p }}
         <button type="submit">Войти</button>
+        <button class="button" onclick="location.href='{% url 'main' %}'">Главная</button>
     </form>
 </body>
 </html>

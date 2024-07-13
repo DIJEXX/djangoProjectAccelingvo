@@ -36,10 +36,11 @@ def register_eng(request):
     else:
         form = RegistrationFormEng()
     return render(request, 'register_eng.html', {'form': form})
+def main(request):
+    return render(request, 'main.html')
 
 def difficulty(request):
     return render(request, 'difficulty.html')
-
 def sound(request):
     return render(request, 'sound.html')
 
