@@ -30,7 +30,7 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Зарегистрироваться</button>
+        <button class="button" type="submit">Зарегистрироваться</button>
     </form>
     {% if form.is_valid %}
         <p>Регистрация прошла успешно!</p>
@@ -40,8 +40,8 @@
     <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         {{ login_form.as_p }}
-        <button type="submit">Войти</button>
-        <button class="button" onclick="location.href='{% url 'main' %}'">Главная</button>
+        <button class="button" type="submit">Войти</button>
+        <button class="button" onclick="location.href='{% url 'main' %}'">Войти</button>
     </form>
 </body>
 </html>
