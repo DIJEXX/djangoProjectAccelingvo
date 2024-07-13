@@ -35,13 +35,5 @@
     {% if form.is_valid %}
         <p>Регистрация прошла успешно!</p>
     {% endif %}
-
-    <h2>Авторизация</h2>
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        {{ login_form.as_p }}
-        <button class="button" type="submit">Войти</button>
-        <button class="button" onclick="location.href='{% url 'main' %}'">Войти</button>
-    </form>
 </body>
 </html>
