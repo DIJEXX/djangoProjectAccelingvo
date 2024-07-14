@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+
+{% block content %} {% if request.user.is_authenticated %}
+<div class="page-main">
+
+	<div id="messageContainer">
+		{% for message in myapp_messages %}
+
+		{% if request.user.is_authenticated and request.user == message.author %}
+		<div class="message__right">
+			<div class="message--user message__bubble--user">
+				<div>
+					<span class="color-gray">[ {{ message.created_at }} ]</span>
+					<i>{{ message.author }}</i>:
+				</div>
+				{{ message.text }}
+			</div>
+		</div>
+		{% else %}
+		<div class="message__left">
+			<div class="message message__bubble">
+				<div>
+					<span class="color-gray">[ {{ message.created_at }} ]</span>
+					<i>{{ message.author }}</i>:
+				</div>
+				{{ message.text }}
+			</div>
+		</div>
+		{% endif %} {% endfor %}
+	</div>
+
+
+	<form
+		onsubmit="sendMessage(); return false;"
+		method="POST"
+		id="mainForm"
+		class="form__main"
+	>
+
+		{% csrf_token %}
+		<input type="hidden" id="csrfToken" value="{{ csrf_token }}" />
+		<input
+			type="hidden"
+			id="userName"
+			value="{{ request.user.username }}"
+		/>
+
+		<div
+			class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+		>
+			<input
+				name="messageField"
+				class="mdl-textfield__input"
+				type="text"
+				id="messageField"
+			/>
+			<label class="mdl-textfield__label" for="messageField"
+				>Text...</label
+			>
+		</div>
+
+		<button
+			class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent submit__main"
+			type="submit"
+		>
+			Send
+		</button>
+	</form>
+</div>
+{% else %}
+
+<h1>Not logged in!</h1>
+<p>
+	You are not logged in. Please log in.<br />
+	Please follow the Link for <a href="{% url 'login_user' %}">Login</a>.
+</p>
+
+{% endif %} {% endblock %}
