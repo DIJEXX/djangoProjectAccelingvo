@@ -1,20 +1,18 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
 import random
 from django.conf import settings
 from django.shortcuts import render, redirect
-
 from . forms import CreateUserForm, LoginForm
-
 from django.contrib.auth.decorators import login_required
-
-
-# - Authentication models and functions
-
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
 
-sentences = [
+
+sentences1 = [
+
+]
+
+
+sentences2 = [
     ("Family is the most important thing in my life.", "Семья - самое важное в моей жизни."),
     ("We are going to visit my grandparents this weekend.",
      "В эти выходные мы собираемся навестить моих бабушку и дедушку."),
@@ -56,15 +54,21 @@ sentences = [
     ("She has a beautiful family portrait hanging on the wall.", "У нее висит красивый семейный портрет на стене."),
 ]
 
-def family(request):
-    random.shuffle(sentences)
-    english_sentences = [sentence[0] for sentence in sentences[:5]]
-    russian_sentences = [sentence[1] for sentence in sentences[:5]]
-    context = {
-        'english_sentences': english_sentences,
-        'russian_sentences': russian_sentences
-    }
-    return render(request, 'family.html', context)
+
+sentences3 = [
+
+]
+
+
+sentences4 = [
+
+]
+
+
+sentences5 = [
+
+]
+
 
 def index(request):
     return render(request, 'index.html')
@@ -118,8 +122,17 @@ def my_login(request):
 def main(request):
     return render(request, 'main.html')
 
-# def login(request):
-#     return render(request, 'login.html')
+
+def family(request):
+    random.shuffle(sentences2)
+    english_sentences = [sentence[0] for sentence in sentences2[:5]]
+    russian_sentences = [sentence[1] for sentence in sentences2[:5]]
+    context = {
+        'english_sentences': english_sentences,
+        'russian_sentences': russian_sentences
+    }
+    return render(request, 'family.html', context)
+
 
 def difficulty(request):
     return render(request, 'difficulty.html')
