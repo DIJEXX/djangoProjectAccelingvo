@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
 from myapp.templates.themes.sentencesbank import sentences1, sentences2, sentences3, sentences4, sentences5, psentences, ptranslations
-
+from myapp.templates.difficulty.dictionary import dictionary1, dictionary2, dictionary3
 
 def index(request):
     return render(request, 'index.html')
