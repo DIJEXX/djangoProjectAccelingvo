@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Accelingvo</title>
+    <title>Словарь: Сложный уровень</title>
     <style>
             body {
                 background-image: url('/static/background.jpg');
@@ -21,7 +21,13 @@
             padding: 8px;
             margin: 10px;
             }
-            
+            .label {
+            font-size: 32px;
+            padding: 8px;
+            color: white;    
+            background-color: black;
+            margin: 20px;
+            }
             .button {
                 font-size: 32px;
                 font-weight: bold;
@@ -46,6 +52,20 @@
 </head>
 <body>
 <div style="text-align: center; padding-top: 100px;">
+    <div class="label">Слово: {{ word }}</div>
+    <div class="label">Перевод: {{ translation }}</div>
+    {% if learned_words is not None %}
+        <div class="label">Выученные слова: {{ learned_words }}</div>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="action" value="next" class="button">Следующее слово</button>
+        <button type="submit" name="action" value="check" class="button">Проверить слово</button>
+        <button type="submit" name="action" value="done" class="button">Выполнено</button>
+        <button type="submit" name="action" value="clear" class="button">Очистить статистику</button>
+        <button type="submit" name="action" value="save" class="button">Сохранить словарь</button>
+        <button type="submit" name="action" value="statistics" class="button">Статистика</button>
+    </form>       
 <button class="sbutton" onclick="location.href='{% url 'dictionary' %}'">Назад</button>
 </div>
 </body>
