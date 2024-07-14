@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accelingvo</title>
+    <style>
+        body {
+            font-family: "Roboto", sans-serif;
+            background-image: url('/static/background.jpg');
+            background-size: cover;
+            text-align: center;
+            color: white;
+        }
+        .sentence {
+            font-size: 32px;
+            padding: 8px;
+            background-color: black;
+            margin: 20px;
+        }
+        .button {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            padding: 12px;
+            background-color: black;
+            margin: 20px;
+        }
+        .result {
+            font-size: 32px;
+            margin: 20px;
+        }
+        .sbutton {
+                font-size: 20px;
+                font-weight: bold;
+                color: white;
+                background-color: black;
+                padding: 12px;
+                margin: 20px;
+                border: none;
+                cursor: pointer;
+            }
+    </style>
+</head>
+<body>
+<div style="text-align: center; padding-top: 100px;">
+
+    <div class="sentence">{{ sentence }}</div>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="correct_translation" value="{{ correct_translation }}">
+        <input type="text" name="translation" style="font-size: 32px;">
+        <button type="submit" class="button">Проверить</button>
+    </form>
+    <div class="result" style="color: {{ color }}">{{ result }}</div>
+    <form method="get">
+        <button type="submit" class="button">Следующее предложение</button>
+    </form>
+    <button class="sbutton" onclick="location.href='{% url 'main' %}'">Назад</button>
+</div>
+</body>
+</html>
