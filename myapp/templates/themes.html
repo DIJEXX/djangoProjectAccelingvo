@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Управление темами</title>
+    <link rel="icon" href="{'static/Data/py.ico' %}">
+    <style>
+        body {
+            background-image: url('/static/Data/background.jpg');
+            background-size: cover;
+            font-family: "Times New Roman", Times, serif;
+        }
+        .button {
+            font-size: 32px;
+            font-weight: bold;
+            color: #183b66;
+            padding: 12px;
+            background-color: #8fc6da;
+            border: none;
+            margin: 10px;
+        }
+        .label {
+            font-size: 32px;
+            color: #183b66;
+            padding: 8px;
+            background-color: #8fc6da;
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: center; padding-top: 100px;">
+        <h1>Управление темами</h1>
+        <button class="button" onclick="location.href='#'">Изменить тему</button>
+        <button class="button" onclick="location.href='{% url 'main' %}'">Выйти</button>
+    </div>
+    
+</body>
+</html>

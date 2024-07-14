@@ -1,0 +1,127 @@
+{% extends "base.html" %} {% block content %}
+<div class="page-auth">
+	<div class="demo-card-wide mdl-card mdl-shadow--2dp">
+		<div class="mdl-card__title">
+			<h1 class="mdl-card__title-text">register</h1>
+		</div>
+
+		<!-- 
+	{% if form.errors %}
+
+	{% endif %} 
+	-->
+
+		<div class="mdl-card__supporting-text">
+			<form
+				class="form--gap"
+				method="POST"
+				action="{% url 'registry_user' %}"
+			>
+				{% csrf_token %}
+
+				<!-- {{ form.as_p }} -->
+
+
+				<div class="form--gap">
+					{{ form.username.label_tag }}
+					<small>({{ form.username.help_text }})</small>
+					{{ form.username }}
+					<!--prettier-ignore-->
+					{% if form.username.errors %}
+					<ul class="errorlist">
+						{% for error in form.username.errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</div>
+
+
+				<div class="form--gap">
+					{{ form.first_name.label_tag }} {{ form.first_name }}
+					<!--prettier-ignore-->
+					{% if form.first_name.errors %}
+					<ul class="errorlist">
+						{% for error in form.first_name.errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</div>
+
+
+				<div class="form--gap">
+					{{ form.last_name.label_tag }} {{ form.last_name }}
+
+					{% if form.last_name.errors %}
+					<ul class="errorlist">
+						{% for error in form.last_name.errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</div>
+
+
+				<div class="form--gap">
+					{{ form.email.label_tag }} {{ form.email }}
+
+					{% if form.email.errors %}
+					<ul class="errorlist">
+						{% for error in form.email.errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</div>
+
+
+				<div class="form--gap">
+					{{ form.password1.label_tag }}
+					<small>{{ form.password1.help_text }}</small>
+					{{ form.password1 }}
+
+					{% if form.password1.errors %}
+					<ul class="errorlist">
+						{% for error in form.password1.errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</div>
+
+
+				<div class="form--gap">
+					{{ form.password2.label_tag }}
+					<small>({{ form.password2.help_text }})</small>
+					{{ form.password2 }}
+					<!--prettier-ignore-->
+					{% if form.password2.errors %}
+					<ul class="errorlist">
+						{% for error in form.password2.errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</div>
+
+				<button
+					class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btn-register"
+				>
+					Sign in
+				</button>
+			</form>
+		</div>
+
+		<div class="mdl-card__actions mdl-card--border">
+			<a
+				class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+				href="{% url 'login_user' %}"
+			>
+				Back to Login
+			</a>
+		</div>
+	</div>
+</div>
+
+{% endblock%}

@@ -1,0 +1,54 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Авторизация</title>#}
+{#</head>#}
+{#<body>#}
+{#    <h1>Авторизация</h1>#}
+{#    <form method="post" action="{% url 'login' %}">#}
+{#        {% csrf_token %}#}
+{#        {{ login_form.as_p }}#}
+{#        <button class="button" type="submit">Войти</button>#}
+{#        <button class="button" onclick="location.href='{% url 'main' %}'">Войти</button>#}
+{#    </form>#}
+{#</body>#}
+{#</html>#}
+   <!DOCTYPE html>
+   <html lang="ru">
+   <head>
+       <meta charset="UTF-8">
+       <title>Авторизация</title>
+       <style>
+           body {
+               background-image: url('/static/Data/background.jpg');
+               background-size: cover;
+               font-family: "Times New Roman", Times, serif;
+           }
+           .container {
+               text-align: center;
+               padding-top: 50px;
+           }
+           .button {
+               font-size: 32px;
+               font-weight: bold;
+               color: #183b66;
+               background-color: #8fc6da;
+               padding: 12px;
+               margin: 20px;
+               border: none;
+               cursor: pointer;
+           }
+       </style>
+   </head>
+   <body>
+       <div class="container">
+           <h1>Авторизация</h1>
+           <form method="post">
+               {% csrf_token %}
+               {{ form.as_p }}
+               <button class="button" type="submit">Войти</button>
+           </form>
+       </div>
+   </body>
+   </html>
