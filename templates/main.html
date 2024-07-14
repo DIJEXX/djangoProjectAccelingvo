@@ -33,15 +33,13 @@
 </head>
 <body>
     <div style="text-align: center; padding-top: 100px;">
-        <a class="sbutton" onclick="location.href='{% url 'login' %}'">Авторизация</a>
-        <a class="sbutton"  onclick="location.href='{% url 'register' %}'">Регистрация</a>
+        <a class="sbutton" onclick="location.href='{% url 'index' %}'">Выйти из аккаунта</a>
         <h1 style="color: white;">Главное меню</h1>
         <button class="button" onclick="location.href='{% url 'themes' %}'">Темы</button>
         <button class="button" onclick="location.href='{% url 'main' %}'">Словари</button>
         <button class="button" onclick="location.href='{% url 'main' %}'">Предложения</button>
         <button class="button" onclick="location.href='{% url 'sound' %}'">Аудирование</button>
         <button class="button" onclick="location.href='{% url 'difficulty' %}'">Сложность</button>
-        <button class="button" onclick="location.href='{% url 'index' %}'">Выйти</button>
     </div>
 </body>
 </html>
