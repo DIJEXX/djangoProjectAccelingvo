@@ -11,5 +11,5 @@ urlpatterns = [
     path('themes/', views.themes, name='themes'),
     path('difficulty/<str:level>/', views.difficulty_level, name='difficulty_level'),
     path('themes/<str:theme>/', views.theme_selection, name='theme_selection'),
-    path('my-login', views.my_login, name="login"),
+    path('login/', views.login, name='login'),  # Добавьте этот маршрут
 ]

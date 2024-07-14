@@ -1,24 +1,23 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.models import User
-
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
+from .models import User
 
-from django.forms.widgets import PasswordInput, TextInput
-
-
-# - Create/Register a user (Model Form)
-
-class CreateUserForm(UserCreationForm):
-
+class RegistrationForm(forms.ModelForm):
     class Meta:
-
         model = User
-        fields = ['username', 'password1']
+        fields = ['username', 'password']
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
 
-
-# - Authenticate a user (Model Form)
+class RegistrationFormEng(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
 
 class LoginForm(AuthenticationForm):
-
-    username = forms.CharField(widget=TextInput())
-    password = forms.CharField(widget=PasswordInput())
+    username = forms.CharField(label='Логин', max_length=100)
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput)

@@ -1,77 +1,51 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-
+from .forms import RegistrationForm, LoginForm
+from .models import User
 from django.conf import settings
-from django.shortcuts import render, redirect
-
-from . forms import CreateUserForm, LoginForm
-
-from django.contrib.auth.decorators import login_required
-
-
-# - Authentication models and functions
-
-from django.contrib.auth.models import auth
-from django.contrib.auth import authenticate, login, logout
 
 
 def index(request):
     return render(request, 'index.html')
 
 def register(request):
-
-    form = CreateUserForm()
-
-    if request.method == "POST":
-
-        form = CreateUserForm(request.POST)
-
-        if form.is_valid():
-
-            form.save()
-
-            return redirect("login")
-
-
-    context = {'registerform':form}
-
-    return render(request, 'register.html', context=context)
-
-
-
-def my_login(request):
-
-    form = LoginForm()
-
     if request.method == 'POST':
-
-        form = LoginForm(request, data=request.POST)
-
+        form = RegistrationForm(request.POST)
         if form.is_valid():
+            user = form.save(commit=False)
+            user.save()
+            return redirect('/')
 
-            username = request.POST.get('username')
-            password = request.POST.get('password')
+    else:
+        form = RegistrationForm()
 
+    return render(request, 'register.html', {'form': form})
+
+def login(request):
+    if request.method == 'POST':
+        form = LoginForm(request, data=request.POST)
+        print(f"Form is valid: {form.is_valid()}")
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
             user = authenticate(request, username=username, password=password)
-
+            print(f"Authenticated user: {user}")
             if user is not None:
+                login(request, user)
+                return redirect('main')
+            else:
+                print("Invalid user")
+                print(f"Form errors: {form.errors}")
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {'form': form})
 
-                auth.login(request, user)
-
-                return redirect("main")
-
-
-    context = {'loginform':form}
-
-    return render(request, 'login.html', context=context)
 def main(request):
     return render(request, 'main.html')
 
-# def login(request):
-#     return render(request, 'login.html')
-
 def difficulty(request):
     return render(request, 'difficulty.html')
+
 def sound(request):
     return render(request, 'sound.html')
 
