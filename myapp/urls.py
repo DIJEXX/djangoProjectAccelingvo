@@ -19,6 +19,6 @@ urlpatterns = [
     path('difficulty/<str:level>/', views.difficulty_level, name='difficulty_level'),
     path('sound/', views.sound, name='sound'),
     path('text/', views.text, name='text'),
-
+    path('sentence/', views.sentence, name='sentence'),
 
 ]
