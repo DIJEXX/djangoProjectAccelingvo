@@ -4,7 +4,6 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('register/', views.register, name='register'),
-    path('register_eng/', views.register_eng, name='register_eng'),
     path('main/', views.main, name='main'),
     path('difficulty/', views.difficulty, name='difficulty'),
     path('sound/', views.sound, name='sound'),
@@ -12,5 +11,5 @@ urlpatterns = [
     path('themes/', views.themes, name='themes'),
     path('difficulty/<str:level>/', views.difficulty_level, name='difficulty_level'),
     path('themes/<str:theme>/', views.theme_selection, name='theme_selection'),
-    path('login/', views.login, name='login'),  # Добавьте этот маршрут
+    path('my-login', views.my_login, name="login"),
 ]

@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Регистрация</title>
@@ -9,31 +8,18 @@
                 background-size: cover;
                 font-family: "Times New Roman", Times, serif;
             }
-            .container {
-                text-align: center;
-                padding-top: 50px;
-            }
-            .button {
-                font-size: 32px;
-                font-weight: bold;
-                color: #183b66;
-                background-color: #8fc6da;
-                padding: 12px;
-                margin: 20px;
-                border: none;
-                cursor: pointer;
-            }
         </style>
 </head>
-<body>
-    <h1>Регистрация на русском языке</h1>
-    <form method="post">
+
+    <h1> Регистрация </h1>
+
+    <form method="POST" autocomplete="off">
+
         {% csrf_token %}
-        {{ form.as_p }}
-        <button class="button" type="submit">Зарегистрироваться</button>
+
+        {{registerform.as_p}}
+
+        <input type="submit" value="Register"/>
+
     </form>
-    {% if form.is_valid %}
-        <p>Регистрация прошла успешно!</p>
-    {% endif %}
-</body>
 </html>

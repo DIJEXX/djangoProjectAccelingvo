@@ -1,92 +1,69 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from .forms import RegistrationForm, RegistrationFormEng, LoginForm
-from .models import User
+
 from django.conf import settings
+from django.shortcuts import render, redirect
+
+from . forms import CreateUserForm, LoginForm
+
+from django.contrib.auth.decorators import login_required
+
+
+# - Authentication models and functions
+
+from django.contrib.auth.models import auth
+from django.contrib.auth import authenticate, login, logout
 
 
 def index(request):
     return render(request, 'index.html')
 
 def register(request):
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        # login_form = LoginForm(request, data=request.POST)
+
+    form = CreateUserForm()
+
+    if request.method == "POST":
+
+        form = CreateUserForm(request.POST)
+
         if form.is_valid():
-            user = form.save(commit=False)
-            user.language = 'ru'
-            user.save()
-            return redirect('/')
-        # elif login_form.is_valid():
-        #     user = login_form.get_user()
-        #     login(request, user)
-        #     return redirect('/')
-    else:
-        form = RegistrationForm()
-        # login_form = LoginForm()
-    return render(request, 'register.html', {'form': form})
-    # return render(request, 'register.html', {'form': form, 'login_form': login_form})
 
-def register_eng(request):
-    if request.method == 'POST':
-        form = RegistrationFormEng(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.language = 'en'
-            user.save()
-            return redirect('/')
-    else:
-        form = RegistrationFormEng()
-    return render(request, 'register_eng.html', {'form': form})
+            form.save()
+
+            return redirect("login")
 
 
-# def login(request):
-#     print("Login")
-#     if request.method == 'POST':
-#
-#         form = LoginForm(request, data=request.POST)
-#         print(form.get_user())
-#
-#         if form.is_valid():
-#             user = form.get_user()
-#             print(user)
-#             login(request, user)
-#             return redirect('main')
-#     else:
-#         form = LoginForm()
-#     return render(request, 'login.html', {'form': form})
-#     # return render(request, 'login.html', {'login_form': form})
+    context = {'registerform':form}
 
-def login(request):
-    print("Login")
+    return render(request, 'register.html', context=context)
+
+
+
+def my_login(request):
+
+    form = LoginForm()
+
     if request.method == 'POST':
 
         form = LoginForm(request, data=request.POST)
-        print(form.get_user())
-        print(request.POST.get('username'))
-        print(request.POST.get('password'))
-        user = authenticate(
-            username=request.POST.get('username'),
-            password=request.POST.get('password')
-        )
-        print(user)
-        login(request, user)
-        return redirect('main')
-        # if form.is_valid():
-        #     user = authenticate(
-        #         username=request.POST.get('username'),
-        #         password=request.POST.get('password')
-        #     )
-        #     print(request.POST.get('username'))
-        #     print(request.POST.get('password'))
-        #     print(user)
-        #     login(request, user)
-        #     return redirect('main')
-    else:
-        form = LoginForm()
-    return render(request, 'login.html', {'form': form})
-    # return render(request, 'login.html', {'login_form': form})
 
+        if form.is_valid():
+
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+
+                auth.login(request, user)
+
+                return redirect("main")
+
+
+    context = {'loginform':form}
+
+    return render(request, 'login.html', context=context)
 def main(request):
     return render(request, 'main.html')
 
