@@ -13,9 +13,9 @@
         .button {
             font-size: 32px;
             font-weight: bold;
-            color: #183b66;
+            color: white;
+            background-color: black;
             padding: 12px;
-            background-color: #8fc6da;
             border: none;
             margin: 10px;
         }
@@ -25,11 +25,23 @@
             padding: 8px;
             background-color: #8fc6da;
         }
+        .sbutton {
+                font-size: 20px;
+                font-weight: bold;
+                color: white;
+                background-color: black;
+                padding: 12px;
+                margin: 20px;
+                border: none;
+                cursor: pointer;
+            }
     </style>
 </head>
 <body>
     <div style="text-align: center; padding-top: 100px;">
-        <div class="label">Главное меню</div>
+        <a class="sbutton" onclick="location.href='{% url 'login' %}'">Авторизация</a>
+        <a class="sbutton"  onclick="location.href='{% url 'register' %}'">Регистрация</a>
+        <h1 style="color: #183b66;">Главное меню</h1>
         <button class="button" onclick="location.href='{% url 'themes' %}'">Темы</button>
         <button class="button" onclick="location.href='{% url 'main' %}'">Словари</button>
         <button class="button" onclick="location.href='{% url 'main' %}'">Предложения</button>

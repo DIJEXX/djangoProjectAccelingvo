@@ -16,8 +16,18 @@
             .button {
                 font-size: 32px;
                 font-weight: bold;
-                color: #183b66;
-                background-color: #8fc6da;
+                color: white;
+                background-color: black;
+                padding: 12px;
+                margin: 20px;
+                border: none;
+                cursor: pointer;
+            }
+            .sbutton {
+                font-size: 20px;
+                font-weight: bold;
+                color: white;
+                background-color: black;
                 padding: 12px;
                 margin: 20px;
                 border: none;
@@ -27,7 +37,9 @@
 </head>
 <body>
     <div class="container">
-        <h1 style="color: #183b66;"> Регистрация </h1>
+        <a class="sbutton" onclick="location.href='{% url 'login' %}'">Авторизация</a>
+        <a class="sbutton"  onclick="location.href='{% url 'register' %}'">Регистрация</a>
+        <h1 style="color: white;"> Регистрация </h1>
 
         <form method="POST" autocomplete="off">
 
@@ -35,7 +47,7 @@
 
         {{registerform.as_p}}
 
-        <input type="submit" value="Register"/>
+        <input class="button" type="submit" value="Register"/>
 
         </form>
     </div>
