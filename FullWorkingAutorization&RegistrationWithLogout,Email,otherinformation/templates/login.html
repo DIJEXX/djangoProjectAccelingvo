@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+
+{% block content %} {% if request.user.is_authenticated %}
+<h1>You´re Already Logged In!</h1>
+
+{% else %}
+<div class="page-auth">
+	<div class="demo-card-wide mdl-card mdl-shadow--2dp">
+		<div class="mdl-card__title">
+			<h1 class="mdl-card__title-text">Login</h1>
+		</div>
+
+		<div class="mdl-card__supporting-text">
+			<form method="POST" action="{% url 'login_user' %}">
+				{% csrf_token %}
+
+				<input type="hidden" name="redirect" value="{{ redirect }}" />
+
+				<div
+					class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+				>
+					<input
+						class="mdl-textfield__input"
+						type="text"
+						id="username"
+						name="username"
+					/>
+					<label class="mdl-textfield__label" for="username"
+						>Username...</label
+					>
+				</div>
+
+				<div
+					class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+				>
+					<input
+						class="mdl-textfield__input"
+						type="password"
+						id="password"
+						name="password"
+						autocomplete="off"
+					/>
+					<label class="mdl-textfield__label" for="password"
+						>Password...</label
+					>
+				</div>
+
+				<div class="mdl-card__supporting-text">
+					{% if wrongPassword %}
+					<p>Wrong Password.</p>
+					{% endif %}
+
+					{% if successfulRegistration %}
+					<p>You are Successful Registered</p>
+					{% endif %}
+				</div>
+
+				<div>
+					<button
+						class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+					>
+						Login
+					</button>
+				</div>
+			</form>
+		</div>
+
+		<div class="mdl-card__actions mdl-card--border">
+			<a
+				class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+				href="{% url 'registry_user' %}"
+			>
+				Register Now
+			</a>
+		</div>
+	</div>
+</div>
+
+{% endif %} {% endblock %}
