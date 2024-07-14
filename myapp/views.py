@@ -123,6 +123,21 @@ def main(request):
     return render(request, 'main.html')
 
 
+def themes(request):
+    return render(request, 'themes.html')
+
+
+def popular(request):
+    random.shuffle(sentences2)
+    english_sentences = [sentence[0] for sentence in sentences2[:5]]
+    russian_sentences = [sentence[1] for sentence in sentences2[:5]]
+    context = {
+        'english_sentences': english_sentences,
+        'russian_sentences': russian_sentences
+    }
+    return render(request, 'popular.html', context)
+
+
 def family(request):
     random.shuffle(sentences2)
     english_sentences = [sentence[0] for sentence in sentences2[:5]]
@@ -134,6 +149,39 @@ def family(request):
     return render(request, 'family.html', context)
 
 
+def school(request):
+    random.shuffle(sentences2)
+    english_sentences = [sentence[0] for sentence in sentences2[:5]]
+    russian_sentences = [sentence[1] for sentence in sentences2[:5]]
+    context = {
+        'english_sentences': english_sentences,
+        'russian_sentences': russian_sentences
+    }
+    return render(request, 'school.html', context)
+
+
+def shop(request):
+    random.shuffle(sentences2)
+    english_sentences = [sentence[0] for sentence in sentences2[:5]]
+    russian_sentences = [sentence[1] for sentence in sentences2[:5]]
+    context = {
+        'english_sentences': english_sentences,
+        'russian_sentences': russian_sentences
+    }
+    return render(request, 'shop.html', context)
+
+
+def doctor(request):
+    random.shuffle(sentences2)
+    english_sentences = [sentence[0] for sentence in sentences2[:5]]
+    russian_sentences = [sentence[1] for sentence in sentences2[:5]]
+    context = {
+        'english_sentences': english_sentences,
+        'russian_sentences': russian_sentences
+    }
+    return render(request, 'doctor.html', context)
+
+
 def difficulty(request):
     return render(request, 'difficulty.html')
 def sound(request):
@@ -142,8 +190,7 @@ def sound(request):
 def text(request):
     return render(request, 'text.html')
 
-def themes(request):
-    return render(request, 'themes.html')
+
 
 def difficulty_level(request, level):
     return render(request, 'difficulty_level.html', {'level': level})
