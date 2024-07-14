@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accelingvo</title>
+    <style>
+            body {
+                background-image: url('/static/background.jpg');
+                background-size: cover;
+                font-family: "Times New Roman", Times, serif;
+            }
+            .container {
+                text-align: center;
+                padding-top: 50px;
+            }
+            
+            .sentence {
+            font-size: 24px;
+            color: white;
+            background-color: black;    
+            padding: 8px;
+            margin: 10px;
+            }
+            
+            .button {
+                font-size: 32px;
+                font-weight: bold;
+                color: white;
+                background-color: black;
+                padding: 12px;
+                margin: 20px;
+                border: none;
+                cursor: pointer;
+            }
+            .sbutton {
+                font-size: 20px;
+                font-weight: bold;
+                color: white;
+                background-color: black;
+                padding: 12px;
+                margin: 20px;
+                border: none;
+                cursor: pointer;
+            }
+    </style>
+</head>
+<body>
+<div style="text-align: center; padding-top: 100px;">
+<button class="sbutton" onclick="location.href='{% url 'dictionary' %}'">Назад</button>
+</div>
+</body>
+</html>

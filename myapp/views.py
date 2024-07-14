@@ -393,20 +393,22 @@ def sentence(request):
     }
     return render(request, 'sentence.html', context)
 
+def dictionary(request):
+    return render(request, 'dictionary.html')
+
+def easy(request):
+    return render(request, 'difficulty/easy.html')
+def medium(request):
+    return render(request, 'difficulty/medium.html')
+def hard(request):
+    return render(request, 'difficulty/hard.html')
 
 
-def difficulty(request):
-    return render(request, 'difficulty.html')
 def sound(request):
     return render(request, 'sound.html')
 
 def text(request):
     return render(request, 'text.html')
-
-
-
-def difficulty_level(request, level):
-    return render(request, 'difficulty_level.html', {'level': level})
 
 def theme_selection(request, theme):
     return render(request, 'theme_selection.html', {'theme': theme})
