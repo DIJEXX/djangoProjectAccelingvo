@@ -5,7 +5,7 @@
     <link rel="icon" href="{'static/Data/py.ico' %}">
     <style>
             body {
-                background-image: url('/static/Data/background.jpg');
+                background-image: url('/static/background.jpg');
                 background-size: cover;
                 font-family: "Times New Roman", Times, serif;
             }
@@ -39,13 +39,12 @@
     <div class="container">
         <a class="sbutton" onclick="location.href='{% url 'login' %}'">Авторизация</a>
         <a class="sbutton"  onclick="location.href='{% url 'register' %}'">Регистрация</a>
-        <h1 style="color: white;"> Авторизация </h1>
-        <form method="POST" autocomplete="off">
+        <h1 style="color: white;"> Авторизация <form method="POST" autocomplete="off">
             {% csrf_token %}
 
             {{ loginform.as_p }}
-            <input class="button" type="submit" value="Login"/>
-        </form>
+            <input class="button" type="submit" value="Войти"/>
+        </form></h1>
     </div>
 </body>
 </html>

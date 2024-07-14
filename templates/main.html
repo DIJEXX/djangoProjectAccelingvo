@@ -6,7 +6,7 @@
     <link rel="icon" href="{'static/Data/py.ico' %}">
     <style>
         body {
-            background-image: url('/static/Data/background.jpg');
+            background-image: url('/static/background.jpg');
             background-size: cover;
             font-family: "Times New Roman", Times, serif;
         }
@@ -18,12 +18,6 @@
             padding: 12px;
             border: none;
             margin: 10px;
-        }
-        .label {
-            font-size: 34px;
-            color: #183b66;
-            padding: 8px;
-            background-color: #8fc6da;
         }
         .sbutton {
                 font-size: 20px;
@@ -41,7 +35,7 @@
     <div style="text-align: center; padding-top: 100px;">
         <a class="sbutton" onclick="location.href='{% url 'login' %}'">Авторизация</a>
         <a class="sbutton"  onclick="location.href='{% url 'register' %}'">Регистрация</a>
-        <h1 style="color: #183b66;">Главное меню</h1>
+        <h1 style="color: white;">Главное меню</h1>
         <button class="button" onclick="location.href='{% url 'themes' %}'">Темы</button>
         <button class="button" onclick="location.href='{% url 'main' %}'">Словари</button>
         <button class="button" onclick="location.href='{% url 'main' %}'">Предложения</button>
