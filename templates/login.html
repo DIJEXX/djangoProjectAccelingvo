@@ -25,19 +25,16 @@
             }
     </style>
 </head>
+<body>
+    <div class="container">
+        <h1 style="color: #183b66;"> Авторизация </h1>
+        <form method="POST" autocomplete="off">
+            {% csrf_token %}
 
-<h1> Авторизация </h1>
+            {{ loginform.as_p }}
 
-<form method="POST" autocomplete="off">
-
-    {% csrf_token %}
-
-    {{ loginform.as_p }}
-
-    <input type="submit" value="Login"/>
-
-
-</form>
-
-
+            <input type="submit" value="Login"/>
+        </form>
+    </div>
+</body>
 </html>
