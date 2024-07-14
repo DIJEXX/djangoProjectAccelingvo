@@ -196,14 +196,14 @@ def themes(request):
 
 
 def popular(request):
-    random.shuffle(sentences2)
+    random.shuffle(sentences1)
     english_sentences = [sentence[0] for sentence in sentences1[:5]]
     russian_sentences = [sentence[1] for sentence in sentences1[:5]]
     context = {
         'english_sentences': english_sentences,
         'russian_sentences': russian_sentences
     }
-    return render(request, 'popular.html', context)
+    return render(request, 'themes/popular.html', context)
 
 
 def family(request):
@@ -214,40 +214,114 @@ def family(request):
         'english_sentences': english_sentences,
         'russian_sentences': russian_sentences
     }
-    return render(request, 'family.html', context)
+    return render(request, 'themes/family.html', context)
 
 
 def school(request):
-    random.shuffle(sentences2)
+    random.shuffle(sentences3)
     english_sentences = [sentence[0] for sentence in sentences3[:5]]
     russian_sentences = [sentence[1] for sentence in sentences3[:5]]
     context = {
         'english_sentences': english_sentences,
         'russian_sentences': russian_sentences
     }
-    return render(request, 'school.html', context)
+    return render(request, 'themes/school.html', context)
 
 
 def shop(request):
-    random.shuffle(sentences2)
+    random.shuffle(sentences4)
     english_sentences = [sentence[0] for sentence in sentences4[:5]]
     russian_sentences = [sentence[1] for sentence in sentences4[:5]]
     context = {
         'english_sentences': english_sentences,
         'russian_sentences': russian_sentences
     }
-    return render(request, 'shop.html', context)
+    return render(request, 'themes/shop.html', context)
 
 
 def doctor(request):
-    random.shuffle(sentences2)
+    random.shuffle(sentences5)
     english_sentences = [sentence[0] for sentence in sentences5[:5]]
     russian_sentences = [sentence[1] for sentence in sentences5[:5]]
     context = {
         'english_sentences': english_sentences,
         'russian_sentences': russian_sentences
     }
-    return render(request, 'doctor.html', context)
+    return render(request, 'themes/doctor.html', context)
+
+
+psentences = [
+    "I love ice cream",  # Пример предложений на английском
+    "Today is a beautiful day",
+    "Can I help you?",
+    "I have a cat",
+    "What's your favorite color?",
+    "It's raining outside",
+    "How old are you?",
+    "I like pizza",
+    "Where do you live?",
+    "Do you speak English?",
+    "I am tired",
+    "What time is it?",
+    "I am hungry",
+    "What's your name?",
+    "I like to listen to music",
+    "I like to play tennis",
+    "How was your day?",
+    "I'm going to the cinema tonight",
+    "I enjoy reading books",
+    "Have a nice day!"
+]
+
+ptranslations = [
+    "Я люблю мороженое",  # Примеры соответствующих переводов на русский
+    "Сегодня прекрасный день",
+    "Могу я вам помочь?",
+    "У меня есть кошка",
+    "Какой у вас любимый цвет?",
+    "На улице идет дождь",
+    "Сколько тебе лет?",
+    "Я люблю пиццу",
+    "Где вы живете?",
+    "Вы говорите по-английски?",
+    "Я устал",
+    "Который час?",
+    "Я голоден",
+    "Как вас зовут?",
+    "Мне нравится слушать музыку",
+    "Мне нравится играть в теннис",
+    "Как прошел ваш день?",
+    "Сегодня вечером я иду в кино",
+    "Мне нравится читать книги",
+    "Хорошего дня!"
+]
+def get_random_sentence():
+    index = random.randint(0, len(psentences) - 1)
+    return psentences[index], ptranslations[index]
+
+def sentence(request):
+    if request.method == 'POST':
+        user_translation = request.POST.get('translation')
+        correct_translation = request.POST.get('correct_translation')
+        if user_translation == correct_translation:
+            result = "Правильный перевод!"
+            color = "green"
+        else:
+            result = "Неправильный перевод!"
+            color = "red"
+    else:
+        result = ""
+        color = ""
+
+    sentence, translation = get_random_sentence()
+    context = {
+        'sentence': sentence,
+        'correct_translation': translation,
+        'result': result,
+        'color': color
+    }
+    return render(request, 'sentence.html', context)
+
 
 
 def difficulty(request):
