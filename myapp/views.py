@@ -13,7 +13,7 @@ from myapp.templates.difficulty.dictionary import dictionary1, dictionary2, dict
 import pyttsx3
 import sounddevice as sd
 from scipy.io.wavfile import write
-from playsound import playsound
+from playsound3 import playsound3
 
 
 tts = pyttsx3.init()
@@ -21,6 +21,7 @@ tts.setProperty('rate', '50')
 tts.setProperty('volume', 1.0)
 tts.setProperty('language', 'english')
 tts.setProperty('voice', 'english')
+
 
 sentences = [
     "I love ice cream",
@@ -77,7 +78,7 @@ def my_sound(request):
             sd.wait()
             write("myapp/templates/records/recorded_voice.wav", fs, audio)
         elif 'play' in request.POST:
-            playsound("myapp/templates/records/recorded_voice.wav")
+            playsound3.playsound("myapp/templates/records/recorded_voice.wav")
 
     context = {
         'sentence': current_sentence
