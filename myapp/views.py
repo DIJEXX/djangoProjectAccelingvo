@@ -49,6 +49,79 @@ def my_sound(request):
     }
     return render(request, 'sound.html', context)
 
+#easy.html - словарь 1
+
+words = []
+learned_words = 0
+
+def load_words():
+    global words, learned_words
+    learned_words = 0
+    with open("myapp/templates/difficulty/dictionary1.txt", "r", encoding="utf-8") as file:
+        lines = file.readlines()
+        print(lines)
+        for line in lines:
+            word, translation, learned = line.strip().split("|")
+            words.append((word, translation, learned == "True"))
+            if learned == "True":
+                learned_words += 1
+
+def save_words():
+    global words
+    with open("myapp/templates/difficulty/dictionary1.txt", "w", encoding="utf-8") as file:
+        for word, translation, learned in words:
+            file.write(f"{word}|{translation}|{str(learned)}\n")
+
+def get_next_word_index(current_word_index):
+    global words
+    next_word_index = current_word_index + 1
+    while next_word_index < len(words) and words[next_word_index][2]:
+        next_word_index += 1
+    if next_word_index < len(words):
+        return next_word_index
+    else:
+        return -1
+
+def show_word(request):
+    global words, learned_words
+    if not words:
+        load_words()
+    current_word_index = request.session.get('current_word_index', 0)
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        if action == 'next':
+            current_word_index = get_next_word_index(current_word_index)
+        elif action == 'check':
+            request.session['show_translation'] = True
+        elif action == 'done':
+            word, translation, learned = words[current_word_index]
+            if not learned:
+                words[current_word_index] = (word, translation, True)
+                learned_words += 1
+            current_word_index = get_next_word_index(current_word_index)
+        elif action == 'clear':
+            learned_words = 0
+            for i in range(len(words)):
+                word, translation, learned = words[i]
+                if learned:
+                    words[i] = (word, translation, False)
+        elif action == 'save':
+            save_words()
+        elif action == 'statistics':
+            request.session['show_statistics'] = True
+        request.session['current_word_index'] = current_word_index
+        # return redirect('show_word')
+
+    word, translation, learned = words[current_word_index]
+    context = {
+        'word': word,
+        'translation': translation if request.session.get('show_translation') else '',
+        'learned_words': learned_words if request.session.get('show_statistics') else None
+    }
+    request.session['show_translation'] = False
+    request.session['show_statistics'] = False
+    return render(request, 'difficulty/easy.html', context)
+
 
 def index(request):
     return render(request, 'index.html')

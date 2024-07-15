@@ -15,7 +15,7 @@ urlpatterns = [
         path('doctor/', views.doctor, name='doctor'),
 
     path('dictionary/', views.dictionary, name='dictionary'),
-    path('easy/', views.easy, name='easy'),
+    path('show_word/', views.show_word, name='easy'),
     path('medium/', views.medium, name='medium'),
     path('hard/', views.hard, name='hard'),
 
