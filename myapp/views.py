@@ -7,6 +7,7 @@ from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
 from myapp.templates.themes.sentencesbank import sentences1, sentences2, sentences3, sentences4, sentences5, psentences, ptranslations
 from myapp.templates.difficulty.dictionary import dictionary1, dictionary2, dictionary3
+from myapp.templates.records.sentencesp import sentencesforsay
 
 
 
@@ -16,35 +17,13 @@ from scipy.io.wavfile import write
 from playsound3 import playsound3
 
 
+
 tts = pyttsx3.init()
 tts.setProperty('rate', '50')
 tts.setProperty('volume', 1.0)
 tts.setProperty('language', 'english')
 tts.setProperty('voice', 'english')
 
-
-sentences = [
-    "I love ice cream",
-    "Today is a beautiful day",
-    "Can I help you?",
-    "I have a cat",
-    "What's your favorite color?",
-    "It's raining outside",
-    "How old are you?",
-    "I like pizza",
-    "Where do you live?",
-    "Do you speak English?",
-    "I am tired",
-    "What time is it?",
-    "I am hungry",
-    "What's your name?",
-    "I like to listen to music",
-    "I like to play tennis",
-    "How was your day?",
-    "I'm going to the cinema tonight",
-    "I enjoy reading books",
-    "Have a nice day!"
-]
 def speak(text):
     tts.runAndWait()
     tts.say(text)
@@ -56,18 +35,18 @@ def my_sound(request):
     current_sentence_index = request.session['current_sentence_index']
     print(current_sentence_index)
 
-    current_sentence = sentences[current_sentence_index]
+    current_sentence = sentencesforsay[current_sentence_index]
     print(current_sentence)
     if request.method == 'POST':
         if 'next' in request.POST:
             print(current_sentence_index)
 
-            current_sentence_index = (current_sentence_index + 1) % len(sentences)
+            current_sentence_index = (current_sentence_index + 1) % len(sentencesforsay)
             print(current_sentence_index)
             request.session['current_sentence_index'] = current_sentence_index
             print(request.session['current_sentence_index'])
             print(current_sentence)
-            current_sentence = sentences[current_sentence_index]
+            current_sentence = sentencesforsay[current_sentence_index]
             print(current_sentence)
             speak(current_sentence)
 
