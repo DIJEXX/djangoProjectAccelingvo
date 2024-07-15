@@ -20,13 +20,13 @@ def my_sound(request):
     if 'current_sentence_index' not in request.session:
         request.session['current_sentence_index'] = 0
     current_sentence_index = request.session['current_sentence_index']
-    current_sentence = sentencesforsay[current_sentence_index]
+    current_sentence = sentencesforsay[current_sentence_index+2]
 
     if request.method == 'POST':
         if 'next' in request.POST:
             current_sentence_index = (current_sentence_index + 1) % len(sentencesforsay)
             request.session['current_sentence_index'] = current_sentence_index
-            tts = gTTS(text=sentencesforsay[current_sentence_index], lang='en')
+            tts = gTTS(text=sentencesforsay[current_sentence_index+1], lang='en')
             tts.save("myapp/templates/sound/reformation.mp3")
             playsound3.playsound("myapp/templates/sound/reformation.mp3")
 
@@ -152,11 +152,6 @@ def doctor(request):
         'russian_sentences': russian_sentences
     }
     return render(request, 'themes/doctor.html', context)
-
-
-def get_random_sentence():
-    index = random.randint(0, len(psentences) - 1)
-    return psentences[index], ptranslations[index]
 
 
 def get_random_sentence():
