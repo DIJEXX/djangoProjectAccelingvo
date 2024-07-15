@@ -16,17 +16,22 @@ from playsound3 import playsound3
 from gtts import gTTS
 import os
 
+
 def my_sound(request):
     if 'current_sentence_index' not in request.session:
         request.session['current_sentence_index'] = 0
     current_sentence_index = request.session['current_sentence_index']
-    current_sentence = sentencesforsay[current_sentence_index+2]
+    current_sentence = sentencesforsay[current_sentence_index]
 
     if request.method == 'POST':
         if 'next' in request.POST:
-            current_sentence_index = (current_sentence_index + 1) % len(sentencesforsay)
+            # Выбираем случайное предложение
+            current_sentence_index = random.randint(0, len(sentencesforsay) - 1)    #(current_sentence_index + 1) % len(sentencesforsay)
             request.session['current_sentence_index'] = current_sentence_index
-            tts = gTTS(text=sentencesforsay[current_sentence_index+1], lang='en')
+            current_sentence = sentencesforsay[current_sentence_index]
+
+        elif 'playtext' in request.POST:
+            tts = gTTS(text=current_sentence, lang='en')
             tts.save("myapp/templates/sound/reformation.mp3")
             playsound3.playsound("myapp/templates/sound/reformation.mp3")
 
