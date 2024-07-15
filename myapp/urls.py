@@ -20,7 +20,6 @@ urlpatterns = [
     path('hard/', views.hard, name='hard'),
 
     path('sound/', views.sound, name='sound'),
-    path('text/', views.text, name='text'),
     path('sentence/', views.sentence, name='sentence'),
 
 ]
