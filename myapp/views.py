@@ -8,63 +8,12 @@ from django.contrib.auth import authenticate, login, logout
 from myapp.templates.themes.sentencesbank import sentences1, sentences2, sentences3, sentences4, sentences5, psentences, ptranslations
 from myapp.templates.difficulty.dictionary import dictionary1, dictionary2, dictionary3
 
+
+
 import pyttsx3
 import sounddevice as sd
 from scipy.io.wavfile import write
 from playsound import playsound
-
-def index(request):
-    return render(request, 'index.html')
-
-def register(request):
-
-    form = CreateUserForm()
-
-    if request.method == "POST":
-
-        form = CreateUserForm(request.POST)
-
-        if form.is_valid():
-
-            form.save()
-
-            return redirect("login")
-
-
-    context = {'registerform':form}
-
-    return render(request, 'register.html', context=context)
-
-def get_random_sentence():
-    index = random.randint(0, len(psentences) - 1)
-    return psentences[index], ptranslations[index]
-
-def sentence(request):
-    if request.method == 'POST':
-        user_translation = request.POST.get('translation')
-        correct_translation = request.POST.get('correct_translation')
-        if user_translation == correct_translation:
-            result = "Правильный перевод!"
-            color = "green"
-        else:
-            result = "Неправильный перевод!"
-            color = "red"
-    else:
-        result = ""
-        color = ""
-
-    sentence, translation = get_random_sentence()
-    context = {
-        'sentence': sentence,
-        'correct_translation': translation,
-        'result': result,
-        'color': color
-    }
-    return render(request, 'sentence.html', context)
-
-
-
-
 
 
 tts = pyttsx3.init()
@@ -137,6 +86,30 @@ def my_sound(request):
 #end audio
 
 
+
+
+
+def index(request):
+    return render(request, 'index.html')
+
+def register(request):
+
+    form = CreateUserForm()
+
+    if request.method == "POST":
+
+        form = CreateUserForm(request.POST)
+
+        if form.is_valid():
+
+            form.save()
+
+            return redirect("login")
+
+
+    context = {'registerform':form}
+
+    return render(request, 'register.html', context=context)
 
 def my_login(request):
     print("login")
@@ -224,6 +197,11 @@ def doctor(request):
         'russian_sentences': russian_sentences
     }
     return render(request, 'themes/doctor.html', context)
+
+
+def get_random_sentence():
+    index = random.randint(0, len(psentences) - 1)
+    return psentences[index], ptranslations[index]
 
 
 def get_random_sentence():
