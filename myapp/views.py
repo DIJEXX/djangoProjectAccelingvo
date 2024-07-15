@@ -8,6 +8,11 @@ from django.contrib.auth import authenticate, login, logout
 from myapp.templates.themes.sentencesbank import sentences1, sentences2, sentences3, sentences4, sentences5, psentences, ptranslations
 from myapp.templates.difficulty.dictionary import dictionary1, dictionary2, dictionary3
 
+import pyttsx3
+import sounddevice as sd
+from scipy.io.wavfile import write
+from playsound import playsound
+
 def index(request):
     return render(request, 'index.html')
 
@@ -56,9 +61,80 @@ def sentence(request):
         'color': color
     }
     return render(request, 'sentence.html', context)
+#strart audio
+sentences = [
+    "I love ice cream",
+    "Today is a beautiful day",
+    "Can I help you?",
+    "I have a cat",
+    "What's your favorite color?",
+    "It's raining outside",
+    "How old are you?",
+    "I like pizza",
+    "Where do you live?",
+    "Do you speak English?",
+    "I am tired",
+    "What time is it?",
+    "I am hungry",
+    "What's your name?",
+    "I like to listen to music",
+    "I like to play tennis",
+    "How was your day?",
+    "I'm going to the cinema tonight",
+    "I enjoy reading books",
+    "Have a nice day!"
+]
+
+tts = pyttsx3.init()
+tts.setProperty('rate', '50')
+tts.setProperty('volume', 1.0)
+tts.setProperty('language', 'english')
+tts.setProperty('voice', 'english')
+
+def speak(text):
+    tts.runAndWait()
+    tts.say(text)
+
+
+def my_sound(request):
+    if 'current_sentence_index' not in request.session:
+        request.session['current_sentence_index'] = 0
+
+    current_sentence_index = request.session['current_sentence_index']
+    print(current_sentence_index)
+
+    current_sentence = sentences[current_sentence_index]
+    print(current_sentence)
+    if request.method == 'POST':
+        if 'next' in request.POST:
+            print(current_sentence_index)
+
+            current_sentence_index = (current_sentence_index + 1) % len(sentences)
+            print(current_sentence_index)
+            request.session['current_sentence_index'] = current_sentence_index
+            print(request.session['current_sentence_index'])
+            print(current_sentence)
+            current_sentence = sentences[current_sentence_index]
+            print(current_sentence)
+            speak(current_sentence)
+
+        elif 'record' in request.POST:
+            fs = 44100  # Частота дискретизации
+            seconds = 5  # Продолжительность записи (в секундах)
+            audio = sd.rec(int(seconds * fs), samplerate=fs, channels=1)
+            sd.wait()
+            write("myapp/templates/records/recorded_voice.wav", fs, audio)
+        elif 'play' in request.POST:
+            playsound("myapp/templates/records/recorded_voice.wav")
+
+    context = {
+        'sentence': current_sentence
+    }
+    return render(request, 'sound.html', context)
+#end audio
 
 def my_login(request):
-
+    print("login")
     form = LoginForm()
 
     if request.method == 'POST':
@@ -186,8 +262,4 @@ def hard(request):
 def sound(request):
     return render(request, 'sound.html')
 
-def text(request):
-    return render(request, 'text.html')
 
-def theme_selection(request, theme):
-    return render(request, 'theme_selection.html', {'theme': theme})

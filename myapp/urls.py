@@ -19,8 +19,7 @@ urlpatterns = [
     path('medium/', views.medium, name='medium'),
     path('hard/', views.hard, name='hard'),
 
-    path('sound/', views.sound, name='sound'),
-    path('text/', views.text, name='text'),
+    path('my_sound/', views.my_sound, name='sound'),
     path('sentence/', views.sentence, name='sentence'),
 
 ]

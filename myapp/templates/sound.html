@@ -2,46 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Управление звуком</title>
-    <link rel="icon" href="{'static/Data/py.ico' %}">
+    <title>Accelingvo</title>
     <style>
-            body {
-                background-image: url('/static/background.jpg');
-                background-size: cover;
-                font-family: "Times New Roman", Times, serif;
-            }
-            .container {
-                text-align: center;
-                padding-top: 50px;
-            }
-            .button {
-                font-size: 32px;
-                font-weight: bold;
-                color: white;
-                background-color: black;
-                padding: 12px;
-                margin: 20px;
-                border: none;
-                cursor: pointer;
-            }
-            .sbutton {
-                font-size: 20px;
-                font-weight: bold;
-                color: white;
-                background-color: black;
-                padding: 12px;
-                margin: 20px;
-                border: none;
-                cursor: pointer;
-            }
+        body {
+            background-image: url('/static/background.jpg');
+            background-size: cover;
+            font-family: "Times New Roman", Times, serif;
+            text-align: center;
+            color: #183b66;
+        }
+        .label {
+            font-size: 32px;
+            padding: 8px;
+            background-color: #8fc6da;
+            margin: 20px;
+        }
+        .button {
+            font-size: 32px;
+            font-weight: bold;
+            color: #183b66;
+            padding: 12px;
+            background-color: #8fc6da;
+            margin: 20px;
+        }
     </style>
 </head>
 <body>
-    <div style="text-align: center; padding-top: 100px;">
-        <h1 style="color: white;">Управление звуком</h1>
-        <button class="button" onclick="location.href='#'">Включить звук</button>
-        <button class="button" onclick="location.href='#'">Выключить звук</button>
-        <button class="sbutton" onclick="location.href='{% url 'main' %}'">Назад</button>
-    </div>
+    <div class="label">{{ sentence }}</div>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="next" class="button">Дальше</button>
+        <button type="submit" name="record" class="button">Записать голос (5 секунд)</button>
+        <button type="submit" name="play" class="button">Прослушать голос</button>
+    </form>
+    <form method="get" action="{% url 'main' %}">
+        <button type="submit" class="button">←</button>
+    </form>
 </body>
 </html>
