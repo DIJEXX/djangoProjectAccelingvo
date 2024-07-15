@@ -61,7 +61,18 @@ def sentence(request):
         'color': color
     }
     return render(request, 'sentence.html', context)
-#strart audio
+
+
+
+
+
+
+tts = pyttsx3.init()
+tts.setProperty('rate', '50')
+tts.setProperty('volume', 1.0)
+tts.setProperty('language', 'english')
+tts.setProperty('voice', 'english')
+
 sentences = [
     "I love ice cream",
     "Today is a beautiful day",
@@ -84,17 +95,9 @@ sentences = [
     "I enjoy reading books",
     "Have a nice day!"
 ]
-
-tts = pyttsx3.init()
-tts.setProperty('rate', '50')
-tts.setProperty('volume', 1.0)
-tts.setProperty('language', 'english')
-tts.setProperty('voice', 'english')
-
 def speak(text):
     tts.runAndWait()
     tts.say(text)
-
 
 def my_sound(request):
     if 'current_sentence_index' not in request.session:
@@ -132,6 +135,8 @@ def my_sound(request):
     }
     return render(request, 'sound.html', context)
 #end audio
+
+
 
 def my_login(request):
     print("login")
