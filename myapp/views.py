@@ -1,79 +1,55 @@
 import random
 from django.conf import settings
 from django.shortcuts import render, redirect
-from . forms import CreateUserForm, LoginForm
+from .forms import CreateUserForm, LoginForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
-from myapp.templates.themes.sentencesbank import sentences1, sentences2, sentences3, sentences4, sentences5, psentences, ptranslations
+from myapp.templates.themes.sentencesbank import sentences1, sentences2, sentences3, sentences4, sentences5, psentences, \
+    ptranslations
 from myapp.templates.difficulty.dictionary import dictionary1, dictionary2, dictionary3
-from myapp.templates.records.sentencesp import sentencesforsay
+from myapp.templates.sound.sentencesp import sentencesforsay
 
-
-
-import pyttsx3
 import sounddevice as sd
 from scipy.io.wavfile import write
 from playsound3 import playsound3
-
-
-
-tts = pyttsx3.init()
-tts.setProperty('rate', '50')
-tts.setProperty('volume', 1.0)
-tts.setProperty('language', 'english')
-tts.setProperty('voice', 'english')
-
-def speak(text):
-    tts.runAndWait()
-    tts.say(text)
+from gtts import gTTS
+import os
 
 def my_sound(request):
     if 'current_sentence_index' not in request.session:
         request.session['current_sentence_index'] = 0
-
     current_sentence_index = request.session['current_sentence_index']
-    print(current_sentence_index)
-
     current_sentence = sentencesforsay[current_sentence_index]
-    print(current_sentence)
+
     if request.method == 'POST':
         if 'next' in request.POST:
-            print(current_sentence_index)
-
             current_sentence_index = (current_sentence_index + 1) % len(sentencesforsay)
-            print(current_sentence_index)
             request.session['current_sentence_index'] = current_sentence_index
-            print(request.session['current_sentence_index'])
-            print(current_sentence)
-            current_sentence = sentencesforsay[current_sentence_index]
-            print(current_sentence)
-            speak(current_sentence)
+            tts = gTTS(text=sentencesforsay[current_sentence_index], lang='en')
+            tts.save("myapp/templates/sound/reformation.mp3")
+            playsound3.playsound("myapp/templates/sound/reformation.mp3")
 
         elif 'record' in request.POST:
             fs = 44100  # Частота дискретизации
             seconds = 5  # Продолжительность записи (в секундах)
             audio = sd.rec(int(seconds * fs), samplerate=fs, channels=1)
             sd.wait()
-            write("myapp/templates/records/recorded_voice.wav", fs, audio)
+            write("myapp/templates/sound/recorded_voice.wav", fs, audio)
         elif 'play' in request.POST:
-            playsound3.playsound("myapp/templates/records/recorded_voice.wav")
+            playsound3.playsound("myapp/templates/sound/recorded_voice.wav")
 
     context = {
         'sentence': current_sentence
     }
     return render(request, 'sound.html', context)
-#end audio
-
-
-
 
 
 def index(request):
     return render(request, 'index.html')
 
-def register(request):
 
+def register(request):
     form = CreateUserForm()
 
     if request.method == "POST":
@@ -81,15 +57,14 @@ def register(request):
         form = CreateUserForm(request.POST)
 
         if form.is_valid():
-
             form.save()
 
             return redirect("login")
 
-
-    context = {'registerform':form}
+    context = {'registerform': form}
 
     return render(request, 'register.html', context=context)
+
 
 def my_login(request):
     print("login")
@@ -107,15 +82,15 @@ def my_login(request):
             user = authenticate(request, username=username, password=password)
 
             if user is not None:
-
                 auth.login(request, user)
 
                 return redirect("main")
 
-
-    context = {'loginform':form}
+    context = {'loginform': form}
 
     return render(request, 'login.html', context=context)
+
+
 def main(request):
     return render(request, 'main.html')
 
@@ -188,6 +163,7 @@ def get_random_sentence():
     index = random.randint(0, len(psentences) - 1)
     return psentences[index], ptranslations[index]
 
+
 def sentence(request):
     if request.method == 'POST':
         user_translation = request.POST.get('translation')
@@ -211,18 +187,22 @@ def sentence(request):
     }
     return render(request, 'sentence.html', context)
 
+
 def dictionary(request):
     return render(request, 'dictionary.html')
 
+
 def easy(request):
     return render(request, 'difficulty/easy.html')
+
+
 def medium(request):
     return render(request, 'difficulty/medium.html')
+
+
 def hard(request):
     return render(request, 'difficulty/hard.html')
 
 
 def sound(request):
     return render(request, 'sound.html')
-
-
