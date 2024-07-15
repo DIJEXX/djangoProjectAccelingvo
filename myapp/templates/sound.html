@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Accelingvo</title>
+    <title>Произношение и аудирование</title>
     <style>
         body {
             background-image: url('/static/background.jpg');
@@ -14,20 +14,31 @@
         .label {
             font-size: 32px;
             padding: 8px;
-            background-color: #8fc6da;
+            background-color: black;
             margin: 20px;
         }
         .button {
             font-size: 32px;
             font-weight: bold;
-            color: #183b66;
+            color: white;
             padding: 12px;
-            background-color: #8fc6da;
+            background-color: black;
             margin: 20px;
         }
+        .sbutton {
+                font-size: 20px;
+                font-weight: bold;
+                color: white;
+                background-color: black;
+                padding: 12px;
+                margin: 20px;
+                border: none;
+                cursor: pointer;
+            }
     </style>
 </head>
 <body>
+<div style="text-align: center; padding-top: 100px;">
     <div class="label">{{ sentence }}</div>
     <form method="post">
         {% csrf_token %}
@@ -35,8 +46,7 @@
         <button type="submit" name="record" class="button">Записать голос (5 секунд)</button>
         <button type="submit" name="play" class="button">Прослушать голос</button>
     </form>
-    <form method="get" action="{% url 'main' %}">
-        <button type="submit" class="button">←</button>
-    </form>
+    <button class="sbutton" onclick="location.href='{% url 'main' %}'">Назад</button>
+</div>
 </body>
 </html>
