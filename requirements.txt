@@ -6,4 +6,4 @@ gTTS==2.5.1
 sounddevice==0.4.7
 scipy==1.14.0
 playsound3==2.2.1
-ffmpeg==2.0.12
+ffmpeg==1.4
