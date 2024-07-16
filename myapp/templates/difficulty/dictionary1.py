@@ -10,7 +10,7 @@ def close_window():
 
 
 def load_words():
-    global words, learned_words
+    global hwords, hlearned_words
     learned_words = 0
     with open("Data/Difficulty/dictionary1.txt", "r", encoding="utf-8") as file:
         lines = file.readlines()
@@ -22,14 +22,14 @@ def load_words():
 
 
 def save_words():
-    global words
+    global hwords
     with open("Data/Difficulty/dictionary1.txt", "w", encoding="utf-8") as file:
         for word, translation, learned in words:
             file.write(f"{word}|{translation}|{str(learned)}\n")
 
 
 def get_next_word_index():
-    global current_word_index, words
+    global current_word_index, hwords
     next_word_index = current_word_index + 1
     while next_word_index < len(words) and words[next_word_index][2]:
         next_word_index += 1
@@ -40,8 +40,8 @@ def get_next_word_index():
 
 
 current_word_index = 0
-words = []
-learned_words = 0
+hwords = []
+hlearned_words = 0
 
 
 def update_label(text_word, text_translation):
@@ -50,7 +50,7 @@ def update_label(text_word, text_translation):
 
 
 def show_word():
-    global current_word_index, words
+    global current_word_index, hwords
     if current_word_index < len(words):
         word, translation, learned = words[current_word_index]
         update_label(f"Слово: {word}", "")
@@ -59,7 +59,7 @@ def show_word():
 
 
 def on_first_dictionary_click():
-    global current_word_index, words
+    global current_word_index, hwords
     current_word_index = 0
     load_words()
     next_word_index = get_next_word_index()
@@ -69,7 +69,7 @@ def on_first_dictionary_click():
 
 
 def on_next_one_click():
-    global current_word_index, words
+    global current_word_index, hwords
     next_word_index = get_next_word_index()
     if next_word_index != -1:
         current_word_index = next_word_index
@@ -77,7 +77,7 @@ def on_next_one_click():
 
 
 def on_check_click():
-    global current_word_index, words
+    global current_word_index, hwords
     if current_word_index < len(words):
         word, translation, learned = words[current_word_index]
         update_label(f"Слово: {word}", f"Перевод: {translation}")
@@ -86,7 +86,7 @@ def on_check_click():
 
 
 def on_done_click():
-    global current_word_index, words, learned_words
+    global current_word_index, hwords, hlearned_words
     if current_word_index < len(words):
         word, translation, learned = words[current_word_index]
         if not learned:
@@ -101,7 +101,7 @@ def on_done_click():
 
 
 def on_clear_statistics_click():
-    global words, learned_words
+    global hwords, hlearned_words
     learned_words = 0
     for i in range(len(words)):
         word, translation, learned = words[i]
@@ -117,7 +117,7 @@ def on_save_click():
 
 
 def on_statistics_click():
-    global learned_words
+    global hlearned_words
     text = f"Выученные слова: {learned_words}"
     update_label(text, "")
 

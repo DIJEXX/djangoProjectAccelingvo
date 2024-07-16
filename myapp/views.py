@@ -17,110 +17,224 @@ from gtts import gTTS
 import os
 
 
-def my_sound(request):
-    if 'current_sentence_index' not in request.session:
-        request.session['current_sentence_index'] = 0
-    current_sentence_index = request.session['current_sentence_index']
-    current_sentence = sentencesforsay[current_sentence_index]
+ewords = []
+elearned_words = 0
 
-    if request.method == 'POST':
-        if 'next' in request.POST:
-            # Выбираем случайное предложение
-            current_sentence_index = random.randint(0, len(sentencesforsay) - 1)    #(current_sentence_index + 1) % len(sentencesforsay)
-            request.session['current_sentence_index'] = current_sentence_index
-            current_sentence = sentencesforsay[current_sentence_index]
 
-        elif 'playtext' in request.POST:
-            tts = gTTS(text=current_sentence, lang='en')
-            tts.save("myapp/templates/sound/reformation.mp3")
-            playsound3.playsound("myapp/templates/sound/reformation.mp3")
-
-        elif 'record' in request.POST:
-            fs = 44100  # Частота дискретизации
-            seconds = 5  # Продолжительность записи (в секундах)
-            audio = sd.rec(int(seconds * fs), samplerate=fs, channels=1)
-            sd.wait()
-            write("myapp/templates/sound/recorded_voice.wav", fs, audio)
-        elif 'play' in request.POST:
-            playsound3.playsound("myapp/templates/sound/recorded_voice.wav")
-
-    context = {
-        'sentence': current_sentence
-    }
-    return render(request, 'sound.html', context)
-
-#easy.html - словарь 1
-
-words = []
-learned_words = 0
-
-def load_words():
-    global words, learned_words
-    learned_words = 0
+def eload_words():
+    global ewords, elearned_words
+    elearned_words = 0
     with open("myapp/templates/difficulty/dictionary1.txt", "r", encoding="utf-8") as file:
         lines = file.readlines()
         print(lines)
         for line in lines:
             word, translation, learned = line.strip().split("|")
-            words.append((word, translation, learned == "True"))
+            ewords.append((word, translation, learned == "True"))
             if learned == "True":
-                learned_words += 1
+                elearned_words += 1
 
-def save_words():
-    global words
+def esave_words():
+    global ewords
     with open("myapp/templates/difficulty/dictionary1.txt", "w", encoding="utf-8") as file:
-        for word, translation, learned in words:
+        for word, translation, learned in ewords:
             file.write(f"{word}|{translation}|{str(learned)}\n")
 
-def get_next_word_index(current_word_index):
-    global words
+def eget_next_word_index(current_word_index):
+    global ewords
     next_word_index = current_word_index + 1
-    while next_word_index < len(words) and words[next_word_index][2]:
+    while next_word_index < len(ewords) and ewords[next_word_index][2]:
         next_word_index += 1
-    if next_word_index < len(words):
+    if next_word_index < len(ewords):
         return next_word_index
     else:
         return -1
 
-def show_word(request):
-    global words, learned_words
-    if not words:
-        load_words()
+def easy(request):
+    global ewords, elearned_words
+    if not ewords:
+        eload_words()
     current_word_index = request.session.get('current_word_index', 0)
     if request.method == 'POST':
         action = request.POST.get('action')
         if action == 'next':
-            current_word_index = get_next_word_index(current_word_index)
+            current_word_index = eget_next_word_index(current_word_index)
         elif action == 'check':
             request.session['show_translation'] = True
         elif action == 'done':
-            word, translation, learned = words[current_word_index]
+            word, translation, learned = ewords[current_word_index]
             if not learned:
-                words[current_word_index] = (word, translation, True)
-                learned_words += 1
-            current_word_index = get_next_word_index(current_word_index)
+                ewords[current_word_index] = (word, translation, True)
+                elearned_words += 1
+            current_word_index = eget_next_word_index(current_word_index)
         elif action == 'clear':
-            learned_words = 0
-            for i in range(len(words)):
-                word, translation, learned = words[i]
+            elearned_words = 0
+            for i in range(len(ewords)):
+                word, translation, learned = ewords[i]
                 if learned:
-                    words[i] = (word, translation, False)
+                    ewords[i] = (word, translation, False)
         elif action == 'save':
-            save_words()
+            esave_words()
         elif action == 'statistics':
             request.session['show_statistics'] = True
         request.session['current_word_index'] = current_word_index
-        # return redirect('show_word')
+        # return redirect('easy')
 
-    word, translation, learned = words[current_word_index]
+    word, translation, learned = ewords[current_word_index]
     context = {
         'word': word,
         'translation': translation if request.session.get('show_translation') else '',
-        'learned_words': learned_words if request.session.get('show_statistics') else None
+        'learned_words': elearned_words if request.session.get('show_statistics') else None
     }
     request.session['show_translation'] = False
     request.session['show_statistics'] = False
     return render(request, 'difficulty/easy.html', context)
+
+
+mwords = []
+mlearned_words = 0
+
+
+def mload_words():
+    global mwords, mlearned_words
+    mlearned_words = 0
+    with open("myapp/templates/difficulty/dictionary2.txt", "r", encoding="utf-8") as file:
+        lines = file.readlines()
+        print(lines)
+        for line in lines:
+            word, translation, learned = line.strip().split("|")
+            mwords.append((word, translation, learned == "True"))
+            if learned == "True":
+                mlearned_words += 1
+
+def msave_words():
+    global mwords
+    with open("myapp/templates/difficulty/dictionary2.txt", "w", encoding="utf-8") as file:
+        for word, translation, learned in mwords:
+            file.write(f"{word}|{translation}|{str(learned)}\n")
+
+def mget_next_word_index(current_word_index):
+    global mwords
+    next_word_index = current_word_index + 1
+    while next_word_index < len(mwords) and mwords[next_word_index][2]:
+        next_word_index += 1
+    if next_word_index < len(mwords):
+        return next_word_index
+
+    else:
+        return -1
+
+def medium(request):
+    global mwords, mlearned_words
+    if not mwords:
+        mload_words()
+    current_word_index = request.session.get('current_word_index', 0)
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        if action == 'next':
+            current_word_index = mget_next_word_index(current_word_index)
+        elif action == 'check':
+            request.session['show_translation'] = True
+        elif action == 'done':
+            word, translation, learned = mwords[current_word_index]
+            if not learned:
+                mwords[current_word_index] = (word, translation, True)
+                mlearned_words += 1
+            current_word_index = mget_next_word_index(current_word_index)
+        elif action == 'clear':
+            mlearned_words = 0
+            for i in range(len(mwords)):
+                word, translation, learned = mwords[i]
+                if learned:
+                    mwords[i] = (word, translation, False)
+        elif action == 'save':
+            msave_words()
+        elif action == 'statistics':
+            request.session['show_statistics'] = True
+        request.session['current_word_index'] = current_word_index
+        # return redirect('easy')
+
+    word, translation, learned = mwords[current_word_index]
+    context = {
+        'word': word,
+        'translation': translation if request.session.get('show_translation') else '',
+        'learned_words': mlearned_words if request.session.get('show_statistics') else None
+    }
+    request.session['show_translation'] = False
+    request.session['show_statistics'] = False
+    return render(request, 'difficulty/medium.html', context)
+
+
+hwords = []
+hlearned_words = 0
+
+
+def hload_words():
+    global hwords, hlearned_words
+    hlearned_words = 0
+    with open("myapp/templates/difficulty/dictionary3.txt", "r", encoding="utf-8") as file:
+        lines = file.readlines()
+        print(lines)
+        for line in lines:
+            word, translation, learned = line.strip().split("|")
+            hwords.append((word, translation, learned == "True"))
+            if learned == "True":
+                hlearned_words += 1
+
+def hsave_words():
+    global hwords
+    with open("myapp/templates/difficulty/dictionary3.txt", "w", encoding="utf-8") as file:
+        for word, translation, learned in hwords:
+            file.write(f"{word}|{translation}|{str(learned)}\n")
+
+def hget_next_word_index(current_word_index):
+    global hwords
+    next_word_index = current_word_index + 1
+    while next_word_index < len(hwords) and hwords[next_word_index][2]:
+        next_word_index += 1
+    if next_word_index < len(hwords):
+        return next_word_index
+    else:
+        return -1
+
+def hard(request):
+    global hwords, hlearned_words
+    if not hwords:
+        hload_words()
+    current_word_index = request.session.get('current_word_index', 0)
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        if action == 'next':
+            current_word_index = hget_next_word_index(current_word_index)
+        elif action == 'check':
+            request.session['show_translation'] = True
+        elif action == 'done':
+            word, translation, learned = hwords[current_word_index]
+            if not learned:
+                hwords[current_word_index] = (word, translation, True)
+                hlearned_words += 1
+            current_word_index = hget_next_word_index(current_word_index)
+        elif action == 'clear':
+            hlearned_words = 0
+            for i in range(len(hwords)):
+                word, translation, learned = hwords[i]
+                if learned:
+                    hwords[i] = (word, translation, False)
+        elif action == 'save':
+            hsave_words()
+        elif action == 'statistics':
+            request.session['show_statistics'] = True
+        request.session['current_word_index'] = current_word_index
+        # return redirect('easy')
+
+    word, translation, learned = hwords[current_word_index]
+    context = {
+        'word': word,
+        'translation': translation if request.session.get('show_translation') else '',
+        'learned_words': hlearned_words if request.session.get('show_statistics') else None
+    }
+    request.session['show_translation'] = False
+    request.session['show_statistics'] = False
+    return render(request, 'difficulty/hard.html', context)
 
 
 def index(request):
@@ -261,21 +375,38 @@ def sentence(request):
     return render(request, 'sentence.html', context)
 
 
+def my_sound(request):
+    if 'current_sentence_index' not in request.session:
+        request.session['current_sentence_index'] = 0
+    current_sentence_index = request.session['current_sentence_index']
+    current_sentence = sentencesforsay[current_sentence_index]
+
+    if request.method == 'POST':
+        if 'next' in request.POST:
+            # Выбираем случайное предложение
+            current_sentence_index = random.randint(0, len(sentencesforsay) - 1)    #(current_sentence_index + 1) % len(sentencesforsay)
+            request.session['current_sentence_index'] = current_sentence_index
+            current_sentence = sentencesforsay[current_sentence_index]
+
+        elif 'playtext' in request.POST:
+            tts = gTTS(text=current_sentence, lang='en')
+            tts.save("myapp/templates/sound/reformation.mp3")
+            playsound3.playsound("myapp/templates/sound/reformation.mp3")
+
+        elif 'record' in request.POST:
+            fs = 44100  # Частота дискретизации
+            seconds = 5  # Продолжительность записи (в секундах)
+            audio = sd.rec(int(seconds * fs), samplerate=fs, channels=1)
+            sd.wait()
+            write("myapp/templates/sound/recorded_voice.wav", fs, audio)
+        elif 'play' in request.POST:
+            playsound3.playsound("myapp/templates/sound/recorded_voice.wav")
+
+    context = {
+        'sentence': current_sentence
+    }
+    return render(request, 'sound.html', context)
+
+
 def dictionary(request):
     return render(request, 'dictionary.html')
-
-
-def easy(request):
-    return render(request, 'difficulty/easy.html')
-
-
-def medium(request):
-    return render(request, 'difficulty/medium.html')
-
-
-def hard(request):
-    return render(request, 'difficulty/hard.html')
-
-
-def sound(request):
-    return render(request, 'sound.html')
