@@ -7,7 +7,7 @@ from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
 from myapp.templates.themes.sentencesbank import sentences1, sentences2, sentences3, sentences4, sentences5, psentences, \
     ptranslations
-from myapp.templates.difficulty.dictionary import dictionary1, dictionary2, dictionary3
+#from myapp.templates.difficulty.dictionary import dictionary1, dictionary2, dictionary3
 from myapp.templates.sound.sentencesp import sentencesforsay
 
 import sounddevice as sd
