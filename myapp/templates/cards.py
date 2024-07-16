@@ -2,7 +2,7 @@ import random
 import tkinter as tk
 
 class Card:
-    def init(self, front_text, back_text):
+    def __init__(self, front_text, back_text):
         self.front_text = front_text
         self.back_text = back_text
 
@@ -214,8 +214,6 @@ Highlight – ярко освещать, выдвигать на первый п
 Highway – Магистраль, магистральная шина; Канал информации
 Hook up – Соединять, подключать, связывать
 Hop – Транзит, Транзитный участок, Пересылка
-
-., [16.07.2024 20:58]
 Keypad – Малая клавиатура
 Kickstand – Подставка, стойка
 Immediate access – Прямой доступ
@@ -319,8 +317,6 @@ Slot – Гнездо
 Socket – Гнездо, розетка
 Software – Программное обеспечение
 Speaker – Колонка
-
-., [16.07.2024 20:58]
 Split – Разделение, дробление
 Spread – Распространение
 State – Режим, состояние
@@ -386,5 +382,5 @@ Provider – Провайдер, поставщик
     cards = create_cards(word_list)
     show_cards(cards)
 
-if __name__ == "main":
+if __name__ == "__main__":
     main()
