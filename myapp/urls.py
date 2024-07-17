@@ -21,5 +21,6 @@ urlpatterns = [
 
     path('my_sound/', views.my_sound, name='sound'),
     path('sentence/', views.sentence, name='sentence'),
+    path('show_cards', views.show_cards, name='show_cards'),
 
 ]

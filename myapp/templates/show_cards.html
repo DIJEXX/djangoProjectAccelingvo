@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flashcards</title>
+    <style>
+        body {
+            font-family: "Roboto", sans-serif;
+            background-image: url('/static/background.jpg');
+            background-size: cover;
+            text-align: center;
+            color: white;
+        }
+        .card {
+            font-size: 28px;
+            margin: 20px;
+        }
+        .button {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            background-color: black;
+            padding: 12px;
+            border: none;
+            margin: 10px;
+        }
+        .sbutton {
+                font-size: 20px;
+                font-weight: bold;
+                color: white;
+                background-color: black;
+                padding: 12px;
+                margin: 20px;
+                border: none;
+                cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div style="text-align: center; padding-top: 100px;">
+    <div class="card">{{ front_text }}</div>
+    {% if show_translation %}
+        <div class="card">{{ back_text }}</div>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {% if show_translation %}
+            <button type="submit" name="next" class="button">Next Card</button>
+        {% else %}
+            <button type="submit" name="show_translation" class="button">Show Translation</button>
+        {% endif %}
+    </form>
+    <button class="sbutton" onclick="location.href='{% url 'main' %}'">Назад</button>
+</div>
+</body>
+</html>
