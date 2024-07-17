@@ -8,8 +8,8 @@
 </head>
 <body>
 <div style="text-align: center; padding-top: 100px;">
-    <div class="card">{{ front_text }}</div>
-    {% if show_translation %}<div class="card">{{ back_text }}</div>
+    <div class="label">{{ front_text }}</div>
+    {% if show_translation %}<div class="label">{{ back_text }}</div>
     {% endif %}
     <form method="post">
         {% csrf_token %}
@@ -25,6 +25,7 @@
         <input type="text" name="back_text" placeholder="Back Text" class="form-input" required>
         <button type="submit" name="add_card" class="button">Add Card</button>
     </form>
+    <button class="sbutton" onclick="location.href='{% url 'main' %}'">Назад</button>
 </div>
 </body>
 </html>

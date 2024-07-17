@@ -37,6 +37,7 @@ body {
 .sentence2 {
     font-size: 32px;
     padding: 8px;
+    color: white;
     background-color: black;
     margin: 20px;
 }
@@ -51,6 +52,7 @@ body {
 .label {
     font-size: 32px;
     padding: 8px;
+    color: white;
     background-color: black;
     margin: 20px;
 }
