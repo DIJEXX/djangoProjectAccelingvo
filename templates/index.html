@@ -1,47 +1,18 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Accelingvo</title>
-        <style>
-            body {
-                background-image: url('/static/background.jpg');
-                background-size: cover;
-                font-family: "Times New Roman", Times, serif;
-            }
-            .container {
-                text-align: center;
-                padding-top: 50px;
-            }
-            .button {
-                font-size: 32px;
-                font-weight: bold;
-                color: white;
-                background-color: black;
-                padding: 12px;
-                margin: 20px;
-                border: none;
-                cursor: pointer;
-            }
-            .sbutton {
-                font-size: 20px;
-                font-weight: bold;
-                color: white;
-                background-color: black;
-                padding: 12px;
-                margin: 20px;
-                border: none;
-                cursor: pointer;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <a class="sbutton" onclick="location.href='{% url 'login' %}'">Авторизация</a>
-            <a class="sbutton"  onclick="location.href='{% url 'register' %}'">Регистрация</a>
-            <h1 style="color: white;">Добро пожаловать в Accelingvo!</h1>
-            <button class="button" onclick="location.href='{% url 'register' %}'">Регистрация</button>
-            <button class="button" onclick="location.href='{% url 'login' %}'">Авторизация</button>
-        </div>
-    </body>
-    </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accelingvo</title>
+    <link rel="icon" type="image/png" href="/static/ico.png" />
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+    <a class="sbutton" onclick="location.href='{% url 'login' %}'">Авторизация</a>
+    <a class="sbutton"  onclick="location.href='{% url 'register' %}'">Регистрация</a>
+    <h1 style="color: white;">Добро пожаловать в Accelingvo!</h1>
+    <button class="button" onclick="location.href='{% url 'register' %}'">Регистрация</button>
+    <button class="button" onclick="location.href='{% url 'login' %}'">Авторизация</button>
+</div>
+</body>
+</html>
