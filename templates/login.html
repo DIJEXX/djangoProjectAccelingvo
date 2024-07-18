@@ -8,13 +8,13 @@
 </head>
 <body>
     <div class="container">
-        <a class="sbutton" onclick="location.href='{% url 'login' %}'">Авторизация</a>
-        <a class="sbutton"  onclick="location.href='{% url 'register' %}'">Регистрация</a>
+        <a class="sglow-on-hover" onclick="location.href='{% url 'login' %}'">Авторизация</a>
+        <a class="sglow-on-hover" onclick="location.href='{% url 'register' %}'">Регистрация</a>
         <h1 style="color: white;"> Авторизация <form method="POST" autocomplete="off">
             {% csrf_token %}
 
             {{ loginform.as_p }}
-            <input class="button" type="submit" value="Войти"/>
+            <input class="glow-on-hover" type="submit" value="Войти"/>
         </form></h1>
     </div>
 </body>

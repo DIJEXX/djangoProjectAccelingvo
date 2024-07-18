@@ -14,18 +14,18 @@
     <form method="post">
         {% csrf_token %}
         {% if show_translation %}
-            <button type="submit" name="next" class="button">Next Card</button>
+            <button type="submit" name="next" class="glow-on-hover">Next Card</button>
         {% else %}
-            <button type="submit" name="show_translation" class="button">Show Translation</button>
+            <button type="submit" name="show_translation" class="glow-on-hover">Show Translation</button>
         {% endif %}
     </form>
     <form method="post">
         {% csrf_token %}
         <input type="text" name="front_text" placeholder="Front Text" class="form-input" required>
         <input type="text" name="back_text" placeholder="Back Text" class="form-input" required>
-        <button type="submit" name="add_card" class="button">Add Card</button>
+        <button type="submit" name="add_card" class="glow-on-hover">Add Card</button>
     </form>
-    <button class="sbutton" onclick="location.href='{% url 'main' %}'">Назад</button>
+    <button class="sglow-on-hover" onclick="location.href='{% url 'main' %}'">Назад</button>
 </div>
 </body>
 </html>

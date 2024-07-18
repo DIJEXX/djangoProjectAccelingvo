@@ -11,12 +11,12 @@
     <div class="label">{{ sentence }}</div>
     <form method="post">
         {% csrf_token %}
-        <button type="submit" name="next" class="button">Дальше</button>
-        <button type="submit" name="playtext" class="button">Прослушать текст</button>
-        <button type="submit" name="record" class="button">Записать голос (5 секунд)</button>
-        <button type="submit" name="play" class="button">Прослушать голос</button>
+        <button type="submit" name="next" class="glow-on-hover">Дальше</button>
+        <button type="submit" name="playtext" class="glow-on-hover">Прослушать текст</button>
+        <button type="submit" name="record" class="glow-on-hover">Записать голос (5 секунд)</button>
+        <button type="submit" name="play" class="glow-on-hover">Прослушать голос</button>
     </form>
-    <button class="sbutton" onclick="location.href='{% url 'main' %}'">Назад</button>
+    <button class="sglow-on-hover" onclick="location.href='{% url 'main' %}'">Назад</button>
 </div>
 </body>
 </html>

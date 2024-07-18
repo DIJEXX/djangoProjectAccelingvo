@@ -13,13 +13,13 @@
         {% csrf_token %}
         <input type="hidden" name="correct_translation" value="{{ correct_translation }}">
         <input type="text" name="translation" style="font-size: 32px;">
-        <button type="submit" class="button">Проверить</button>
+        <button type="submit" class="glow-on-hover">Проверить</button>
     </form>
     <div class="result" style="color: {{ color }}">{{ result }}</div>
     <form method="get">
-        <button type="submit" class="button">Следующее предложение</button>
+        <button type="submit" class="glow-on-hover">Следующее предложение</button>
     </form>
-    <button class="sbutton" onclick="location.href='{% url 'main' %}'">Назад</button>
+    <button class="sglow-on-hover" onclick="location.href='{% url 'main' %}'">Назад</button>
 </div>
 </body>
 </html>

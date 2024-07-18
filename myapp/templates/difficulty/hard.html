@@ -15,14 +15,14 @@
     {% endif %}
     <form method="post">
         {% csrf_token %}
-        <button type="submit" name="action" value="next" class="button">Следующее слово</button>
-        <button type="submit" name="action" value="check" class="button">Проверить слово</button>
-        <button type="submit" name="action" value="done" class="button">Выполнено</button>
-        <button type="submit" name="action" value="clear" class="button">Очистить статистику</button>
-        <button type="submit" name="action" value="save" class="button">Сохранить словарь</button>
-        <button type="submit" name="action" value="statistics" class="button">Статистика</button>
+        <button type="submit" name="action" value="next" class="glow-on-hover">Следующее слово</button>
+        <button type="submit" name="action" value="check" class="glow-on-hover">Проверить слово</button>
+        <button type="submit" name="action" value="done" class="glow-on-hover">Выполнено</button>
+        <button type="submit" name="action" value="clear" class="glow-on-hover">Очистить статистику</button>
+        <button type="submit" name="action" value="save" class="glow-on-hover">Сохранить словарь</button>
+        <button type="submit" name="action" value="statistics" class="glow-on-hover">Статистика</button>
     </form>       
-<button class="sbutton" onclick="location.href='{% url 'dictionary' %}'">Назад</button>
+<button class="sglow-on-hover" onclick="location.href='{% url 'dictionary' %}'">Назад</button>
 </div>
 </body>
 </html>

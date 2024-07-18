@@ -15,17 +15,7 @@ body {
     text-align: center;
     padding-top: 50px;
 }
-.button {
-    font-size: 32px;
-    font-weight: bold;
-    color: white;
-    background-color: black;
-    padding: 12px;
-    margin: 20px;
-    border: none;
-    cursor: pointer;
-}
-.sbutton {
+.sglow-on-hover {
     font-size: 20px;
     font-weight: bold;
     color: white;
