@@ -1,3 +1,4 @@
+FROM python
 
 RUN python -m pip install --upgrade pip
 

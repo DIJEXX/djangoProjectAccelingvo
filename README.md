@@ -46,6 +46,8 @@ Used Tech Stack
 
     `source .venv/bin/activate`
 
+Windows: `.venv/Scripts/activate`
+
 3. Clone the repository and install the packages in the virtual env:
 
     `pip install -r requirements.txt`
