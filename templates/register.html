@@ -10,7 +10,8 @@
     <div class="container">
         <button class="sglow-on-hover" type="button" onclick="location.href='{% url 'login' %}'">Авторизация</button>
         <button class="sglow-on-hover" type="button" onclick="location.href='{% url 'register' %}'">Регистрация</button>
-        <h1 style="color: white"> Регистрация
+        <h1 class="maintext">Регистрация</h1>
+        <h1 style="color: white" align="left">
             <form method="POST" autocomplete="off">
             {% csrf_token %}
 
