@@ -11,13 +11,13 @@
     <div>
     <h2 style="color: white;">Английский:</h2>
     {% for sentence in english_sentences %}
-        <div class="sentence">{{ sentence }}</div>
+        <div class="label">{{ sentence }}</div>
     {% endfor %}
     </div>
     <div>
     <h2 style="color: white;">Русский:</h2>
     {% for sentence in russian_sentences %}
-        <div class="sentence">{{ sentence }}</div>
+        <div class="label">{{ sentence }}</div>
     {% endfor %}
     </div>
     <form method="get" action="{% url 'school' %}">

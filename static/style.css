@@ -22,20 +22,6 @@ body {
     text-align: center;
     padding-top: 50px;
 }
-.sentence {
-    font-size: 24px;
-    color: white;
-    background-color: black;
-    padding: 8px;
-    margin: 10px;
-}
-.sentence2 {
-    font-size: 32px;
-    padding: 8px;
-    color: white;
-    background-color: black;
-    margin: 20px;
-}
 .result {
     font-size: 32px;
     margin: 20px;
@@ -46,11 +32,16 @@ body {
 }
 .label {
     font-size: 32px;
-    padding: 8px;
     color: white;
     background-color: black;
-    margin: 20px;
+    margin: 5px;
     border-radius: 10px;
+    padding: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
 }
 .form-input {
     font-size: 20px;
@@ -64,7 +55,6 @@ body {
     outline: none;
     color: white;
     background: black;
-
     border-radius: 10px;
 }
 .sglow-on-hover {

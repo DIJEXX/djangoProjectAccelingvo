@@ -8,7 +8,7 @@
 </head>
 <body>
 <div style="text-align: center; padding-top: 100px;">
-    <div class="sentence2">{{ sentence }}</div>
+    <div class="label">{{ sentence }}</div>
     <form method="post">
         {% csrf_token %}
         <input type="hidden" name="correct_translation" value="{{ correct_translation }}">
