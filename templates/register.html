@@ -8,17 +8,14 @@
 </head>
 <body>
     <div class="container">
-        <a class="sglow-on-hover" onclick="location.href='{% url 'login' %}'">Авторизация</a>
-        <a class="sglow-on-hover" onclick="location.href='{% url 'register' %}'">Регистрация</a>
-        <h1 style="color: white;"> Регистрация
-        <form method="POST" autocomplete="off">
+        <button class="sglow-on-hover" type="button" onclick="location.href='{% url 'login' %}'">Авторизация</button>
+        <button class="sglow-on-hover" type="button" onclick="location.href='{% url 'register' %}'">Регистрация</button>
+        <h1 style="color: white"> Регистрация
+            <form method="POST" autocomplete="off">
+            {% csrf_token %}
 
-        {% csrf_token %}
-
-        {{registerform.as_p}}
-
-        <input class="glow-on-hover" type="submit" value="Зарегистрироваться"/>
-
+            {{registerform.as_p}}
+            <input class="glow-on-hover" type="submit" value="Зарегистрироваться"/>
         </form></h1>
     </div>
 </body>

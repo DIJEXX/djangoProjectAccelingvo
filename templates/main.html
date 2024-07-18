@@ -8,13 +8,13 @@
 </head>
 <body>
     <div style="text-align: center; padding-top: 100px;">
-        <a class="sglow-on-hover" onclick="location.href='{% url 'index' %}'">Выйти из аккаунта</a>
-        <h1 style="color: white;">Главное меню</h1>
-        <button class="glow-on-hover" onclick="location.href='{% url 'themes' %}'">Темы</button>
-        <button class="glow-on-hover" onclick="location.href='{% url 'dictionary' %}'">Словари</button>
-        <button class="glow-on-hover" onclick="location.href='{% url 'sentence' %}'">Предложения</button>
-        <button class="glow-on-hover" onclick="location.href='{% url 'sound' %}'">Аудирование</button>
-        <button class="glow-on-hover" onclick="location.href='{% url 'show_cards' %}'">Карточки</button>
+        <button class="sglow-on-hover" type="button" onclick="location.href='{% url 'index' %}'">Выйти из аккаунта</button>
+        <h1 class="maintext">Главное меню</h1>
+        <button class="glow-on-hover" type="button" onclick="location.href='{% url 'themes' %}'">Темы</button>
+        <button class="glow-on-hover" type="button" onclick="location.href='{% url 'dictionary' %}'">Словари</button>
+        <button class="glow-on-hover" type="button" onclick="location.href='{% url 'sentence' %}'">Предложения</button>
+        <button class="glow-on-hover" type="button" onclick="location.href='{% url 'sound' %}'">Аудирование</button>
+        <button class="glow-on-hover" type="button" onclick="location.href='{% url 'show_cards' %}'">Карточки</button>
     </div>
 </body>
 </html>
