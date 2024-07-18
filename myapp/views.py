@@ -159,7 +159,16 @@ def shop(request):
     return render(request, 'themes/shop.html', context)
 
 
-def doctor(request):
+# def doctor(request):
+#     random.shuffle(sentences5)
+#     english_sentences = [sentence[0] for sentence in sentences5[:5]]
+#     russian_sentences = [sentence[1] for sentence in sentences5[:5]]
+#     context = {
+#         'english_sentences': english_sentences,
+#         'russian_sentences': russian_sentences
+#     }
+#     return render(request, 'themes/doctor.html', context)
+def travel(request):
     random.shuffle(sentences5)
     english_sentences = [sentence[0] for sentence in sentences5[:5]]
     russian_sentences = [sentence[1] for sentence in sentences5[:5]]
@@ -167,7 +176,7 @@ def doctor(request):
         'english_sentences': english_sentences,
         'russian_sentences': russian_sentences
     }
-    return render(request, 'themes/doctor.html', context)
+    return render(request, 'themes/travel.html', context)
 
 
 def get_random_sentence():

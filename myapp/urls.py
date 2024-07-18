@@ -12,7 +12,7 @@ urlpatterns = [
         path('family/', views.family, name='family'),
         path('school/', views.school, name='school'),
         path('shop/', views.shop, name='shop'),
-        path('doctor/', views.doctor, name='doctor'),
+        path('travel/', views.travel, name='travel'),
 
     path('dictionary/', views.dictionary, name='dictionary'),
         path('easy/', views.easy, name='easy'),

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accelingvo</title>
+    <link rel="icon" type="image/png" href="/static/ico.png" />
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div style="text-align: center; padding-top: 100px;">
+    <div>
+    <h2 style="color: white;">Английский:</h2>
+    {% for sentence in english_sentences %}
+        <div class="sentence">{{ sentence }}</div>
+    {% endfor %}
+    </div>
+    <div>
+    <h2 style="color: white;">Русский:</h2>
+    {% for sentence in russian_sentences %}
+        <div class="sentence">{{ sentence }}</div>
+    {% endfor %}
+    </div>
+    <form method="get" action="{% url 'travel' %}">
+        <button type="submit" class="button">Дальше</button>
+    </form>
+<button class="sbutton" onclick="location.href='{% url 'themes' %}'">Назад</button>
+</div>
+</body>
+</html>
