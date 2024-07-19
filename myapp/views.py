@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .forms import CreateUserForm, LoginForm
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 from myapp.templates.themes.sentencesbank import sentences1, sentences2, sentences3, sentences4, sentences5, psentences, \
     ptranslations, word_list
 from myapp.templates.sound.sentencesp import sentencesforsay
@@ -10,6 +11,7 @@ import sounddevice as sd
 from scipy.io.wavfile import write
 from playsound3 import playsound3
 from gtts import gTTS
+
 
 
 def index(request):
@@ -56,7 +58,11 @@ def my_login(request):
 
     return render(request, 'login.html', context=context)
 
+def logout(request):
+    auth.logout(request)
+    return redirect("index")
 
+@login_required(login_url='login')
 def main(request):
     return render(request, 'main.html')
 
@@ -84,7 +90,7 @@ def create_cards(word_list):
 
 cards = create_cards(word_list)
 
-
+@login_required(login_url='login')
 def show_cards(request):
     if 'index' not in request.session:
         request.session['index'] = 0
@@ -110,11 +116,11 @@ def show_cards(request):
     }
     return render(request, 'show_cards.html', context)
 
-
+@login_required(login_url='login')
 def themes(request):
     return render(request, 'themes.html')
 
-
+@login_required(login_url='login')
 def popular(request):
     random.shuffle(sentences1)
     english_sentences = [sentence[0] for sentence in sentences1[:5]]
@@ -125,7 +131,7 @@ def popular(request):
     }
     return render(request, 'themes/popular.html', context)
 
-
+@login_required(login_url='login')
 def family(request):
     random.shuffle(sentences2)
     english_sentences = [sentence[0] for sentence in sentences2[:5]]
@@ -136,7 +142,7 @@ def family(request):
     }
     return render(request, 'themes/family.html', context)
 
-
+@login_required(login_url='login')
 def school(request):
     random.shuffle(sentences3)
     english_sentences = [sentence[0] for sentence in sentences3[:5]]
@@ -147,7 +153,7 @@ def school(request):
     }
     return render(request, 'themes/school.html', context)
 
-
+@login_required(login_url='login')
 def shop(request):
     random.shuffle(sentences4)
     english_sentences = [sentence[0] for sentence in sentences4[:5]]
@@ -158,7 +164,7 @@ def shop(request):
     }
     return render(request, 'themes/shop.html', context)
 
-
+@login_required(login_url='login')
 def travel(request):
     random.shuffle(sentences5)
     english_sentences = [sentence[0] for sentence in sentences5[:5]]
@@ -174,7 +180,7 @@ def get_random_sentence():
     index = random.randint(0, len(psentences) - 1)
     return psentences[index], ptranslations[index]
 
-
+@login_required(login_url='login')
 def sentence(request):
     if request.method == 'POST':
         user_translation = request.POST.get('translation')
@@ -198,7 +204,7 @@ def sentence(request):
     }
     return render(request, 'sentence.html', context)
 
-
+@login_required(login_url='login')
 def my_sound(request):
     if 'current_sentence_index' not in request.session:
         request.session['current_sentence_index'] = 0
@@ -232,7 +238,7 @@ def my_sound(request):
     }
     return render(request, 'sound.html', context)
 
-
+@login_required(login_url='login')
 def dictionary(request):
     return render(request, 'dictionary.html')
 
@@ -270,7 +276,7 @@ def eget_next_word_index(current_word_index):
     else:
         return -1
 
-
+@login_required(login_url='login')
 def easy(request):
     global ewords, elearned_words
     if not ewords:
@@ -346,7 +352,7 @@ def mget_next_word_index(current_word_index):
     else:
         return -1
 
-
+@login_required(login_url='login')
 def medium(request):
     global mwords, mlearned_words
     if not mwords:
@@ -421,7 +427,7 @@ def hget_next_word_index(current_word_index):
     else:
         return -1
 
-
+@login_required(login_url='login')
 def hard(request):
     global hwords, hlearned_words
     if not hwords:
