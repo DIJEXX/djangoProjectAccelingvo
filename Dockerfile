@@ -13,13 +13,7 @@ RUN python -m pip install --upgrade wheel
 
 RUN python -m venv .venv
 
-RUN .venv/Scripts/activate
-
-RUN pip install -r requirements.txt
-
-RUN python manage.py makemigrations
-
-RUN python manage.py migrate
+RUN source .venv/bin/activate
 
 RUN apt update && apt -qy install gcc libjpeg-dev libxslt-dev \
     libpq-dev gettext cron openssh-client flake8 locales vim
@@ -33,6 +27,10 @@ RUN mkdir /accelingvo/static && chown -R accelingvo:accelingvo /accelingvo && ch
 COPY --chown=accelingvo:accelingvo . .
 
 RUN pip install -r requirements.txt
+
+CMD ["python", "manage.py", "makemigrations"]
+
+CMD ["python", "manage.py", "migrate"]
 
 USER accelingvo
 
