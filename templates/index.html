@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <title>Accelingvo</title>
     <link rel="icon" type="image/png" href="/static/ico.png" />
@@ -10,9 +11,60 @@
 <div class="container">
     <button class="sglow-on-hover" type="button"  onclick="location.href='{% url 'login' %}'">Авторизация</button>
     <button class="sglow-on-hover" type="button"  onclick="location.href='{% url 'register' %}'">Регистрация</button>
+
     <h1 class="maintext">Добро пожаловать в Accelingvo!</h1>
+
     <button class="glow-on-hover" type="button" onclick="location.href='{% url 'register' %}'">Регистрация</button>
+
     <button class="glow-on-hover" type="button" onclick="location.href='{% url 'login' %}'">Авторизация</button>
+    <!-- Добавлен раздел "О нас" -->
+
+    <div class="about-us">
+
+        <h2 class="maintext">О нашем проекте</h2>
+        <h2 class="maintext">Interactive computer application for learning foreign languages</h2>
+        <tr style="color: white" align="left">
+            <a href="https://www.youtube.com/">
+                <img
+                    src="https://cdn.icon-icons.com/icons2/195/PNG/256/YouTube_23392.png"
+                    width="48"
+                    height="48"
+                    alt="GitHub Profile"
+                />Демонстрация работы нашего проекта
+            </a>
+
+            <a href="https://github.com/DIJEXX/djangoProjectAccelingvo">
+                <img
+                    src="https://cdn.icon-icons.com/icons2/3053/PNG/512/github_alt_macos_bigsur_icon_190138.png"
+                    width="48"
+                    height="48"
+                    alt="GitHub Profile"
+                />Страница нашего проекта на Github
+            </a>
+            <br />
+            <h2 class="maintext">Contributors</h2>
+
+            <a href="https://github.com/DIJEXX">
+                <img
+                    src="/static/dijexx.png"
+                    width="48"
+                    height="48"
+                    alt="GitHub Profile"
+                />DIJEXX
+            </a>
+            <a href="https://github.com/useroqqq">
+                <img
+                    src="/static/useroqqq.png"
+                    width="48"
+                    height="48"
+                    alt="GitHub Profile"
+                />useroqqq
+            </a>
+            <br />
+        </tr>
+
+    </div>
+
 </div>
 </body>
 </html>

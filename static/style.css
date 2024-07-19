@@ -7,7 +7,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    color: black;
+    color: white;
     background-image: url('background.png');
     background-size: cover;
     font-family: "Roboto Light", "Roboto Light", serif;
