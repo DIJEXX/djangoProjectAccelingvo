@@ -14,7 +14,7 @@ RUN python3 -m pip install --upgrade wheel
 
 RUN useradd -rms /bin/bash accelingvo && chmod 777 /opt /run
 
-RUN mkdir /accelingvo/static && chown -R accelingvo:accelingvo /accelingvo && chmod 755 /accelingvo
+RUN mkdir /accelingvo/static && chown -R accelingvo:accelingvo /accelingvo && chmod 777 /accelingvo
 
 COPY --chown=accelingvo:accelingvo . .
 
@@ -24,10 +24,7 @@ RUN python3 manage.py makemigrations
 
 RUN python3 manage.py migrate
 
-RUN chmod 777 /accelingvo/db.sqlite
-
 USER accelingvo
-
 
 CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
 
