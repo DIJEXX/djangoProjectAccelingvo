@@ -16,7 +16,7 @@ RUN python -m venv .venv
 RUN source .venv/bin/activate
 
 RUN apt update && apt -qy install gcc libjpeg-dev libxslt-dev \
-    libpq-dev gettext cron openssh-client flake8 locales vim
+    libpq-dev gettext cron openssh-client flake8 locales  ffmpeg vim
 
 RUN useradd -rms /bin/bash accelingvo && chmod 777 /opt /run
 
