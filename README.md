@@ -18,16 +18,16 @@ Used Tech Stack
 ### Screenshots
 
 ## First page
-<img src="screenshots/index.png" height="800">
+<img src="static/screenshots/index.png" height="800">
 
 ## Register
-<img src="screenshots/register.png" height="800">
+<img src="static/screenshots/register.png" height="800">
 
 ## Login page
-<img src="screenshots/login.png" height="800">
+<img src="static/screenshots/login.png" height="800">
 
 ## Main page
-<img src="screenshots/main.png" height="800">
+<img src="static/screenshots/main.png" height="800">
 
 <a name="local-venv"></a>
 ### Local environment
