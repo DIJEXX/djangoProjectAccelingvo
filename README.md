@@ -36,10 +36,6 @@ Used Tech Stack
 
 1. Create a virtual environment
 
-    `virtualenv .venv`
-
-    Or
-
     `python -m venv .venv`
 
 2. Activate it
@@ -60,9 +56,6 @@ Windows: `.venv/Scripts/activate`
 
 2. Run server:
 
-    `python manage.py runserver`
-
-#### Run test:
-``python manage.py test``
+    `python manage.py runserver localhost:8000`
 
 Show your support by 🌟 the project!!
