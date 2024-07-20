@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Авторизация</title>
+    <title>Вход</title>
     <link rel="icon" type="image/png" href="/static/ico.png" />
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <div class="container">
-        <button class="sglow-on-hover" type="button" onclick="location.href='{% url 'login' %}'">Авторизация</button>
+        <button class="sglow-on-hover" type="button" onclick="location.href='{% url 'login' %}'">Вход</button>
         <button class="sglow-on-hover" type="button" onclick="location.href='{% url 'register' %}'">Регистрация</button>
         <button class="sglow-on-hover" type="button" onclick="location.href='{% url 'index' %}'">На главную</button>
-        <h1 style="color: white"> Авторизация
+        <h1 style="color: white"> Вход
             <form method="POST" autocomplete="off">
             {% csrf_token %}
 

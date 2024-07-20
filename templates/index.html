@@ -6,48 +6,86 @@
     <title>Accelingvo</title>
     <link rel="icon" type="image/png" href="/static/ico.png" />
     <link rel="stylesheet" href="/static/style.css">
+
+    <style>
+
+        a {
+            text-decoration: none;
+        }
+
+    </style>
 </head>
 <body>
 <div class="container">
-    <button class="sglow-on-hover" type="button"  onclick="location.href='{% url 'login' %}'">Авторизация</button>
+
+    <button class="sglow-on-hover" type="button"  onclick="location.href='{% url 'login' %}'">Вход</button>
     <button class="sglow-on-hover" type="button"  onclick="location.href='{% url 'register' %}'">Регистрация</button>
+
 
     <h1 class="maintext">Добро пожаловать в Accelingvo!</h1>
 
+    <button class="glow-on-hover" type="button" onclick="location.href='{% url 'login' %}'">Вход</button>
+
     <button class="glow-on-hover" type="button" onclick="location.href='{% url 'register' %}'">Регистрация</button>
 
-    <button class="glow-on-hover" type="button" onclick="location.href='{% url 'login' %}'">Авторизация</button>
+
     <!-- Добавлен раздел "О нас" -->
+    <br />
+    <br />
 
     <div class="about-us">
 
-        <h2 class="maintext" style="font-size: 20px">О нашем проекте</h2>
-        <h2 class="maintext" style="font-size: 20px">Interactive computer application for learning foreign languages</h2>
+        <h2 class="maintext">О нашем проекте</h2>
+
+        <h2 class="maintext" style="font-size: 20px">
+            <p>Целью нашего проекта является помощь пользователям в изучении английского языка.</p>
+            <p>Наш сайт написан на языке Python с использованием фреймворка Django.</p>
+            <p>Он является улучшенной версией нашего прошлогоднего проекта, который был desktop приложением.</p>
+            <p>Мы перенесли наш проект в WEB формат для удобного использования.</p>
+        </h2>
+
+        <br />
+
         <tr style="color: white" align="left">
             <a href="https://youtu.be/E1ZLRgsA0Mo?si=Yl0Ch0KMkNUNaN9H">
+
                 <img
-                    src="https://cdn.icon-icons.com/icons2/195/PNG/256/YouTube_23392.png"
+
+                    src="https://cdn.icon-icons.com/icons2/1211/PNG/512/1491579609-yumminkysocialmedia08_83079.png"
+
                     width="48"
+
                     height="48"
+
                 />
-            </a>
+            </a>&nbsp;&nbsp;
+
             <a href="https://github.com/DIJEXX/djangoProjectAccelingvo">
                 <img
-                    src="https://cdn.icon-icons.com/icons2/3053/PNG/512/github_alt_macos_bigsur_icon_190138.png"
+
+                    src="https://cdn.icon-icons.com/icons2/1996/PNG/512/code_development_github_open_source_programming_source_icon_123274.png"
                     width="48"
                     height="48"
                 />
-            </a>
+            </a>&nbsp;&nbsp;
             <a href="https://gitlab.com/DIJEXX/djangoProjectAccelingvo">
+
                 <img
                     src="https://cdn.icon-icons.com/icons2/2108/PNG/512/gitlab_icon_130930.png"
+
                     width="48"
+
                     height="48"
+
                 />
             </a>
+
             <br />
-            <h2 class="maintext">Contributors:</h2>
+
+            <h2 class="maintext">Команда:</h2>
+
             <a href="https://github.com/DIJEXX">
+
                 <img
                     src="/static/dijexx.png"
                     width="48"
@@ -61,13 +99,18 @@
                     height="48"
                     alt="GitHub Profile"
                 />
+
             </a>
+
             <h2 class="maintext" style="font-size: 20px">DIJEXX&nbsp;&nbsp;&nbsp;useroqqq</h2>
+
             <br />
+
         </tr>
 
     </div>
 
 </div>
+
 </body>
 </html>
